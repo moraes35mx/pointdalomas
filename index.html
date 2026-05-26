@@ -4,8 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Point da Lomas — Marketing Hub v2</title>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Permanent+Marker&family=Bangers&display=swap" rel="stylesheet">
+<script src="lib/html2canvas.min.js"></script>
+<style>
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/poppins-500.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/poppins-600.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/poppins-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/poppins-800.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/poppins-900.woff2) format('woff2')}
+@font-face{font-family:'Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/bebas-neue-400.woff2) format('woff2')}
+@font-face{font-family:'Permanent Marker';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/permanent-marker-400.woff2) format('woff2')}
+@font-face{font-family:'Bangers';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/bangers-400.woff2) format('woff2')}
+</style>
 <style>
 :root{--black:#0D0D0D;--dark:#1A1A1A;--dark2:#232323;--dark3:#2D2D2D;--orange:#E8922D;--orange-light:#F5A623;--red:#C41E2A;--red-dark:#9B1B24;--gold:#D4A531;--white:#FFF;--gray:#888;--gray-light:#AAA;--green:#22C55E;--blue:#3B82F6;--purple:#8B5CF6;--pink:#EC4899;--yellow:#FACC15}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -209,7 +219,7 @@ body{font-family:'Poppins',sans-serif;background:var(--black);color:var(--white)
 <div class="app">
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <img src="https://storage.googleapis.com/prod-cardapio-web/uploads/company/logo/5560/thumb_beb79298LOGO_Site.jpg" alt="Logo">
+      <img src="logo.jpg" alt="Logo">
       <div><div class="brand">Point da Lomas</div><div class="sub">Marketing Hub v2</div></div>
     </div>
     <nav class="sidebar-nav">
@@ -380,31 +390,31 @@ body{font-family:'Poppins',sans-serif;background:var(--black);color:var(--white)
 // ============================
 // DATA
 // ============================
-const LOGO='https://storage.googleapis.com/prod-cardapio-web/uploads/company/logo/5560/thumb_beb79298LOGO_Site.jpg';
+const LOGO='logo.jpg';
 const PRODUCTS=[
-  {cat:"Sanduiches",name:"BIG BURGAO",price:9,desc:"Pao, hamburguer, cheddar cremoso, alface, tomate e maionese temperada.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473896/bd20a1baBIG_BURG%C3%83O_C_CHEDDAR.png"},
-  {cat:"Sanduiches",name:"X-BURGUER",price:10,desc:"Pao, hamburguer, queijo, alface, tomate e maionese temperada.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473898/6585361cX-BURGUER.png"},
-  {cat:"Sanduiches",name:"X-CALABRESA",price:12,desc:"Pao, hamburguer, queijo, calabresa, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473901/5ba701d2X-CALABRESA.png"},
-  {cat:"Sanduiches",name:"X-EGG",price:12,desc:"Pao, hamburguer, ovo, queijo, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473900/97924febX-EGG.png"},
-  {cat:"Sanduiches",name:"X-BACON",price:13,desc:"Pao, hamburguer, queijo, bacon, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473903/9c8f5489X-BACON.png"},
-  {cat:"Sanduiches",name:"DUPLO CHEDDAR",price:14,desc:"Pao, 2 hamburgueres, cheddar cremoso, bacon, alface, tomate.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473906/6e48360fDUPLO_CHEDDAR_C_BACON.png"},
-  {cat:"Sanduiches",name:"X-TUDO",price:14,desc:"Pao, hamburguer, ovo, queijo, bacon, calabresa, alface, tomate.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473912/dd5b43a7X-TUDO.png"},
-  {cat:"Sanduiches",name:"X-CHICKEN",price:15,desc:"Pao, frango empanado, queijo, alface, tomate e maionese gourmet.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/524652/dea0ea49WhatsApp_Image_2023-09-20_at_21.51.56.jpeg"},
-  {cat:"Sanduiches",name:"X-MONTANHA",price:18,desc:"3 Paes, 2 hamburgueres, ovo, 2 queijos, bacon, calabresa.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473919/b0a673b2X-MONTANHA__2_.png"},
-  {cat:"Sanduiches",name:"X-CONTRAFILE",price:20,desc:"Pao, iscas de contrafile ao molho shoyu, ovo, queijo, bacon.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473913/d2dfabfbX-CONTRAFIL%C3%89.png"},
-  {cat:"Sanduiches",name:"DUPLO X-TUDO",price:20,desc:"Pao, 2 hamburgueres, 2 ovos, 2 queijos, 4 bacons, 4 calabresas.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473923/5dafdee5DUPLO_X-TUDO.png"},
-  {cat:"Sanduiches",name:"MEGA X-MONTANHA",price:28,desc:"Pao, 4 hamburgueres, 2 ovos, 4 queijos, 4 bacons, 4 calabresas.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473924/c71a80bbMEGA_X-MONTANHA.png"},
-  {cat:"Combos",name:"COMBO CASAL",price:47,desc:"2 lanches + batata frita + refrigerante 1L.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/959390/4f73ea4cPROMO_1.png"},
-  {cat:"Combos",name:"COMBO FAMILIA 3",price:78,desc:"Combo para 3 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473503/914f9768COMBO_2.png"},
-  {cat:"Combos",name:"COMBO FAMILIA 4",price:88,desc:"Combo para 4 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473504/78111138COMBO_3.png"},
-  {cat:"Combos",name:"COMBO FAMILIA 5",price:100,desc:"Combo para 5 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473505/2f9eeb94COMBO_4.png"},
-  {cat:"Porcoes",name:"BATATA FRITA",price:12,desc:"Batata frita crocante.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473515/28528712FRITAS.png"},
-  {cat:"Porcoes",name:"FRITAS C/ CHEDDAR E BACON",price:42,desc:"Batata frita com cheddar e bacon.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473521/251e3a54FRITAS_C_CHEDDAR.png"},
-  {cat:"Porcoes",name:"FRITAS C/ CHURRASCO MISTO",price:55,desc:"Batata frita com churrasco misto.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473527/99bfce2cCHURRASCO_MISTO.png"},
-  {cat:"Acai",name:"ACAI NO COPO",price:14,desc:"Acai no copo com complementos a escolha.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3734959/814bed50A%C3%87A%C3%8D.png"},
-  {cat:"Sobremesas",name:"PAVE DE CHOCOLATE",price:15,desc:"Pave de chocolate cremoso.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3940631/enhanced-image-3940631-2026-04-07T23-46-01-305Z.jpg"},
-  {cat:"Sobremesas",name:"PAVE NINHO C/ MORANGO",price:15,desc:"Pave de ninho com morango.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3947506/enhanced-image-3947506-2026-04-09T15-33-27-324Z.jpg"},
-  {cat:"Milkshake",name:"MILKSHAKE",price:14,desc:"Diversos sabores.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3735620/ec5c5936MILKSHAKE.png"},
+  {cat:"Sanduiches",name:"BIG BURGAO",price:9,desc:"Pao, hamburguer, cheddar cremoso, alface, tomate e maionese temperada.",img:"assets/produtos/big-burgao.png"},
+  {cat:"Sanduiches",name:"X-BURGUER",price:10,desc:"Pao, hamburguer, queijo, alface, tomate e maionese temperada.",img:"assets/produtos/x-burguer.png"},
+  {cat:"Sanduiches",name:"X-CALABRESA",price:12,desc:"Pao, hamburguer, queijo, calabresa, alface, tomate e maionese.",img:"assets/produtos/x-calabresa.png"},
+  {cat:"Sanduiches",name:"X-EGG",price:12,desc:"Pao, hamburguer, ovo, queijo, alface, tomate e maionese.",img:"assets/produtos/x-egg.png"},
+  {cat:"Sanduiches",name:"X-BACON",price:13,desc:"Pao, hamburguer, queijo, bacon, alface, tomate e maionese.",img:"assets/produtos/x-bacon.png"},
+  {cat:"Sanduiches",name:"DUPLO CHEDDAR",price:14,desc:"Pao, 2 hamburgueres, cheddar cremoso, bacon, alface, tomate.",img:"assets/produtos/duplo-cheddar.png"},
+  {cat:"Sanduiches",name:"X-TUDO",price:14,desc:"Pao, hamburguer, ovo, queijo, bacon, calabresa, alface, tomate.",img:"assets/produtos/x-tudo.png"},
+  {cat:"Sanduiches",name:"X-CHICKEN",price:15,desc:"Pao, frango empanado, queijo, alface, tomate e maionese gourmet.",img:"assets/produtos/x-chicken.jpg"},
+  {cat:"Sanduiches",name:"X-MONTANHA",price:18,desc:"3 Paes, 2 hamburgueres, ovo, 2 queijos, bacon, calabresa.",img:"assets/produtos/x-montanha.png"},
+  {cat:"Sanduiches",name:"X-CONTRAFILE",price:20,desc:"Pao, iscas de contrafile ao molho shoyu, ovo, queijo, bacon.",img:"assets/produtos/x-contrafile.png"},
+  {cat:"Sanduiches",name:"DUPLO X-TUDO",price:20,desc:"Pao, 2 hamburgueres, 2 ovos, 2 queijos, 4 bacons, 4 calabresas.",img:"assets/produtos/duplo-x-tudo.png"},
+  {cat:"Sanduiches",name:"MEGA X-MONTANHA",price:28,desc:"Pao, 4 hamburgueres, 2 ovos, 4 queijos, 4 bacons, 4 calabresas.",img:"assets/produtos/mega-x-montanha.png"},
+  {cat:"Combos",name:"COMBO CASAL",price:47,desc:"2 lanches + batata frita + refrigerante 1L.",img:"assets/combos/combo-casal.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 3",price:78,desc:"Combo para 3 pessoas com acompanhamentos.",img:"assets/combos/combo-familia2.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 4",price:88,desc:"Combo para 4 pessoas com acompanhamentos.",img:"assets/combos/combo-familia3.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 5",price:100,desc:"Combo para 5 pessoas com acompanhamentos.",img:"assets/combos/combo-familia4.png"},
+  {cat:"Porcoes",name:"BATATA FRITA",price:12,desc:"Batata frita crocante.",img:"assets/porcoes/batata-frita.png"},
+  {cat:"Porcoes",name:"FRITAS C/ CHEDDAR E BACON",price:42,desc:"Batata frita com cheddar e bacon.",img:"assets/porcoes/fritas-cheddar-bacon.png"},
+  {cat:"Porcoes",name:"FRITAS C/ CHURRASCO MISTO",price:55,desc:"Batata frita com churrasco misto.",img:"assets/porcoes/churrasco-misto.png"},
+  {cat:"Acai",name:"ACAI NO COPO",price:14,desc:"Acai no copo com complementos a escolha.",img:"assets/produtos/acai.png"},
+  {cat:"Sobremesas",name:"PAVE DE CHOCOLATE",price:15,desc:"Pave de chocolate cremoso.",img:"assets/produtos/pave-chocolate.jpg"},
+  {cat:"Sobremesas",name:"PAVE NINHO C/ MORANGO",price:15,desc:"Pave de ninho com morango.",img:"assets/produtos/pave-ninho.jpg"},
+  {cat:"Milkshake",name:"MILKSHAKE",price:14,desc:"Diversos sabores.",img:"assets/produtos/milkshake.png"},
 ];
 
 const TEMPLATES=[
@@ -644,7 +654,7 @@ function initGenerator(){
   const cats=['Todos',...new Set(PRODUCTS.map(p=>p.cat))];
   const filtered=S.productCat&&S.productCat!=='Todos'?PRODUCTS.map((p,i)=>({...p,idx:i})).filter(p=>p.cat===S.productCat):PRODUCTS.map((p,i)=>({...p,idx:i}));
   if(filtered.length&&!filtered.some(p=>p.idx===S.product))S.product=filtered[0].idx;
-  $('product-list').innerHTML=`<div class="cat-filter">${cats.map(c=>`<button class="cat-filter-btn ${(S.productCat||'Todos')===c?'active':''}" onclick="S.productCat='${c}';initGenerator();updatePreview()">${c}</button>`).join('')}</div>`+filtered.map(p=>`<div class="product-item ${p.idx===S.product?'selected':''}" onclick="S.product=${p.idx};initGenerator();applyDefaults();updatePreview()"><img src="${p.img}" alt="${p.name}" crossorigin="anonymous" loading="lazy"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price>0?'R$'+p.price:'Sob consulta'}</div></div></div>`).join('');
+  $('product-list').innerHTML=`<div class="cat-filter">${cats.map(c=>`<button class="cat-filter-btn ${(S.productCat||'Todos')===c?'active':''}" onclick="S.productCat='${c}';initGenerator();updatePreview()">${c}</button>`).join('')}</div>`+filtered.map(p=>`<div class="product-item ${p.idx===S.product?'selected':''}" onclick="S.product=${p.idx};initGenerator();applyDefaults();updatePreview()"><img src="${p.img}" alt="${p.name}" loading="lazy"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price>0?'R$'+p.price:'Sob consulta'}</div></div></div>`).join('');
 
   // Favorites
   renderFavorites();
@@ -828,7 +838,7 @@ function getProductWrapStyle(sz){
 }
 function productImgHtml(src,sz,extraStyle){
   extraStyle=extraStyle||'';
-  return `<div style="${getProductWrapStyle(sz)}${extraStyle}"><div style="position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);z-index:1;pointer-events:none;border-radius:50%;"></div><img src="${src}" style="${getProductImageStyle(sz)}" crossorigin="anonymous"></div>`;
+  return `<div style="${getProductWrapStyle(sz)}${extraStyle}"><div style="position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);z-index:1;pointer-events:none;border-radius:50%;"></div><img src="${src}" style="${getProductImageStyle(sz)}"></div>`;
 }
 
 // ============================
@@ -860,7 +870,7 @@ function updatePreview(){
       ${deco}
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:relative;z-index:3;text-align:center;max-width:90%;">
-        <img src="${LOGO}" style="width:${isSt?'80px':'64px'};height:${isSt?'80px':'64px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:16px;" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'80px':'64px'};height:${isSt?'80px':'64px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:16px;">
         <div style="font-size:${isSt?'36px':'28px'};margin-bottom:8px;color:#D4A531;letter-spacing:6px;text-shadow:0 2px 8px rgba(212,165,49,.3);">★★★★★</div>
         ${getTitleEffect(title,isSt?'34px':'28px')}
         <p style="${fonts.sub}font-size:${isSt?'16px':'14px'};color:rgba(255,255,255,.85);margin:12px 0 20px;">${subtitle}</p>
@@ -880,12 +890,12 @@ function updatePreview(){
       ${deco}
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'20px 16px 10px':'14px 16px 6px'};">
-        <img src="${LOGO}" style="width:${isSt?'44px':'36px'};height:${isSt?'44px':'36px'};border-radius:50%;border:2px solid #E8922D;" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'44px':'36px'};height:${isSt?'44px':'36px'};border-radius:50%;border:2px solid #E8922D;">
         <div style="text-align:right;">${getTitleEffect(title,isSt?'22px':'18px')}</div>
       </div>
       <div style="position:relative;z-index:3;flex:1;display:grid;grid-template-columns:1fr 1fr ${isSt?'':'1fr'};gap:${isSt?'8px':'6px'};padding:${isSt?'8px 16px':'6px 14px'};align-content:center;">
         ${items.map(it=>`<div style="background:rgba(0,0,0,.25);border-radius:10px;padding:${isSt?'10px':'8px'};text-align:center;${S.style==='neon'?'border:1px solid rgba(232,146,45,.2);':''}${S.style==='premium'?'border:1px solid rgba(212,165,49,.15);':''}">
-          <img src="${it.img}" style="width:${isSt?'64px':'52px'};height:${isSt?'64px':'52px'};object-fit:cover;border-radius:50%;mix-blend-mode:multiply;filter:brightness(1.1);" crossorigin="anonymous">
+          <img src="${it.img}" style="width:${isSt?'64px':'52px'};height:${isSt?'64px':'52px'};object-fit:cover;border-radius:50%;mix-blend-mode:multiply;filter:brightness(1.1);">
           <p style="font-family:Poppins,sans-serif;font-size:${isSt?'10px':'8px'};font-weight:700;color:white;margin:4px 0 2px;">${it.name}</p>
           <p style="font-family:Poppins,sans-serif;font-size:${isSt?'11px':'9px'};font-weight:800;color:#E8922D;">R$${it.price}</p>
         </div>`).join('')}
@@ -926,7 +936,7 @@ function updatePreview(){
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#006341,#FFC72C,#006341);z-index:5;"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#006341,#FFC72C,#006341);z-index:5;"></div>
       <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
-        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #FFC72C;" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #FFC72C;">
         <div style="background:rgba(0,100,65,.85);padding:4px 14px;border-radius:20px;"><span style="font-family:Poppins,sans-serif;font-size:${isSt?'11px':'10px'};font-weight:800;color:#FFC72C;letter-spacing:2px;">COPA 2026</span></div>
       </div>
       <div style="position:relative;z-index:3;text-align:center;padding:0 ${pad};">
@@ -951,7 +961,7 @@ function updatePreview(){
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:relative;z-index:3;text-align:center;max-width:90%;">
-        <img src="${LOGO}" style="width:${isSt?'90px':'72px'};height:${isSt?'90px':'72px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:20px;${S.style==='neon'?'box-shadow:0 0 20px rgba(232,146,45,.4);':''}" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'90px':'72px'};height:${isSt?'90px':'72px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:20px;${S.style==='neon'?'box-shadow:0 0 20px rgba(232,146,45,.4);':''}">
         ${getTitleEffect(title,isSt?'36px':'30px')}
         <div style="margin:20px 0;padding:20px 32px;background:rgba(0,0,0,.3);border-radius:16px;${S.style==='neon'?'border:1px solid rgba(232,146,45,.3);box-shadow:0 0 20px rgba(232,146,45,.1);':''}${S.style==='premium'?'border:1px solid rgba(212,165,49,.2);':''}">
           <p style="${fonts.sub}font-size:${isSt?'44px':'36px'};color:#E8922D;margin:0;">${subtitle}</p>
@@ -974,7 +984,7 @@ function updatePreview(){
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
       <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
-        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;">
         <div style="background:rgba(232,146,45,.2);padding:5px 14px;border-radius:20px;">
           <span style="font-family:Poppins,sans-serif;font-size:10px;font-weight:800;color:#E8922D;letter-spacing:2px;">BASTIDORES</span>
         </div>
@@ -1000,7 +1010,7 @@ function updatePreview(){
       ${deco}
       <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#22C55E,#16A34A);z-index:5;"></div>
       <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
-        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #22C55E;" crossorigin="anonymous">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #22C55E;">
         <div style="background:#22C55E;padding:6px 16px;border-radius:20px;"><span style="font-family:Poppins,sans-serif;font-size:11px;font-weight:800;color:white;letter-spacing:1px;">ENTREGA GRÁTIS</span></div>
       </div>
       <div style="position:relative;z-index:3;text-align:center;padding:8px ${pad} 0;">
@@ -1030,7 +1040,7 @@ function updatePreview(){
     <div style="position:absolute;top:0;left:0;right:0;height:5px;${topBar}z-index:5;"></div>
 
     <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 6px'};">
-      <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;${S.style==='neon'?'box-shadow:0 0 12px rgba(232,146,45,.4);':''}" crossorigin="anonymous">
+      <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;${S.style==='neon'?'box-shadow:0 0 12px rgba(232,146,45,.4);':''}">
       <div style="background:${isFlash?'#FACC15':'#E8922D'};padding:5px 14px;border-radius:20px;${S.style==='neon'?'box-shadow:0 0 12px rgba(232,146,45,.4);':''}">
         <span style="font-family:Poppins,sans-serif;font-size:10px;font-weight:800;color:#0D0D0D;letter-spacing:1px;">${pillText}</span>
       </div>
@@ -1063,7 +1073,7 @@ async function exportPost(){
   const canvas=$('post-canvas');
   const scale=S.format==='feed'?1080/540:1080/360;
   try{
-    const c=await html2canvas(canvas,{scale,useCORS:true,allowTaint:true,backgroundColor:null});
+    const c=await html2canvas(canvas,{scale,allowTaint:true,backgroundColor:null});
     const link=document.createElement('a');
     const p=PRODUCTS[S.product];
     const ts=Date.now().toString(36);
