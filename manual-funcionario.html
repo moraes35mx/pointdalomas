@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Manual Geral — Point da Lomas Marketing Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;color:#1a1a1a;max-width:800px;margin:0 auto;padding:40px 32px;font-size:13px;line-height:1.7}
+@media print{body{padding:20px 16px;font-size:11px}h1{font-size:22px!important}h2{font-size:16px!important;page-break-after:avoid}h3{font-size:13px!important}table{font-size:10px}.no-print{display:none}.tip{break-inside:avoid}}
+h1{font-size:28px;font-weight:800;text-align:center;margin-bottom:4px;color:#0D0D0D}
+.subtitle{text-align:center;color:#888;font-size:13px;margin-bottom:32px}
+h2{font-size:20px;font-weight:800;color:#C41E2A;margin:28px 0 12px;padding-bottom:6px;border-bottom:3px solid #E8922D}
+h3{font-size:15px;font-weight:700;color:#E8922D;margin:16px 0 8px}
+p{margin-bottom:10px}
+table{width:100%;border-collapse:collapse;margin:10px 0 16px}
+th{background:#0D0D0D;color:#E8922D;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td{padding:8px 12px;border-bottom:1px solid #eee}
+tr:nth-child(even){background:#f9f9f9}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700}
+.badge-orange{background:rgba(232,146,45,.15);color:#E8922D}
+.badge-pink{background:rgba(236,72,153,.15);color:#EC4899}
+.badge-green{background:rgba(34,197,94,.15);color:#16A34A}
+.badge-blue{background:rgba(59,130,246,.15);color:#3B82F6}
+.badge-purple{background:rgba(139,92,246,.15);color:#8B5CF6}
+.tip{background:#FFF7ED;border-left:4px solid #E8922D;padding:12px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:12px}
+.tip strong{color:#E8922D}
+.tip-green{background:#F0FDF4;border-left-color:#22C55E}
+.tip-green strong{color:#16A34A}
+.tip-blue{background:#EFF6FF;border-left-color:#3B82F6}
+.tip-blue strong{color:#3B82F6}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{counter-increment:step;padding:8px 0 8px 40px;position:relative;margin-bottom:4px}
+.steps li::before{content:counter(step);position:absolute;left:0;top:6px;width:28px;height:28px;background:#E8922D;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+.logo-header{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.logo-header img{width:48px;height:48px;border-radius:12px}
+hr{border:none;border-top:1px dashed #ddd;margin:24px 0}
+.toc{background:#f8f8f8;border-radius:12px;padding:20px 24px;margin:16px 0 28px}
+.toc h3{color:#0D0D0D;margin:0 0 10px}
+.toc ol{padding-left:20px;margin:0}
+.toc li{margin-bottom:4px;font-size:12px}
+.toc a{color:#E8922D;text-decoration:none;font-weight:600}
+.toc a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="logo-header">
+<img src="https://storage.googleapis.com/prod-cardapio-web/uploads/company/logo/5560/thumb_beb79298LOGO_Site.jpg" alt="Logo">
+<div>
+<h1>Manual Geral</h1>
+<div class="subtitle">Point da Lomas — Marketing Hub v3</div>
+</div>
+</div>
+
+<hr>
+
+<div class="toc">
+<h3>Sumário</h3>
+<ol>
+<li><a href="#abrir">Como Abrir</a></li>
+<li><a href="#menu">Menu Lateral (6 Páginas)</a></li>
+<li><a href="#criar">Criar Post — Passo a Passo</a></li>
+<li><a href="#favoritos">Favoritos</a></li>
+<li><a href="#calendario">Calendário de Conteúdo</a></li>
+<li><a href="#plano">Plano Semanal de Conteúdo</a></li>
+<li><a href="#copies">Banco de Copies</a></li>
+<li><a href="#anuncios">Criador de Anúncios</a></li>
+<li><a href="#rotina">Rotina Diária Recomendada</a></li>
+<li><a href="#dados">Dados do Negócio</a></li>
+</ol>
+</div>
+
+<hr>
+
+<h2 id="abrir">1. Como Abrir</h2>
+<p><strong>Duplo clique</strong> no arquivo <code>index.html</code> na pasta <code>Pointdalomas</code>. Abre direto no navegador (usar Chrome de preferência). Precisa de internet para carregar as fotos dos produtos e as fontes.</p>
+<div class="tip"><strong>Dica:</strong> Pode criar um atalho na área de trabalho pro <code>index.html</code> para acesso rápido.</div>
+
+<hr>
+
+<h2 id="menu">2. Menu Lateral (6 Páginas)</h2>
+<table>
+<tr><th>Página</th><th>O que faz</th></tr>
+<tr><td><strong>Dashboard</strong></td><td>Tela inicial com atalhos rápidos e próximas datas importantes</td></tr>
+<tr><td><strong>Criar Post</strong></td><td>Gerador de imagens para Instagram (feed e story) — o principal do sistema</td></tr>
+<tr><td><strong>Calendário</strong></td><td>Calendário de conteúdo mensal com 4 estratégias semanais + datas comemorativas</td></tr>
+<tr><td><strong>Plano Semanal</strong></td><td>28 sugestões de conteúdo organizadas por 4 estratégias de marketing</td></tr>
+<tr><td><strong>Banco de Copies</strong></td><td>Textos prontos para legendas do Instagram — 11 categorias, 50+ textos</td></tr>
+<tr><td><strong>Anúncios</strong></td><td>Copies estratégicas para tráfego pago (Instagram/Facebook Ads) + guia de segmentação</td></tr>
+</table>
+
+<hr>
+
+<h2 id="criar">3. Criar Post — Passo a Passo</h2>
+
+<h3>3.1 Escolher o Template (tipo de post)</h3>
+<table>
+<tr><th>Template</th><th>Quando usar</th></tr>
+<tr><td><strong>Promo do Dia</strong></td><td>Promoção diária de produto individual</td></tr>
+<tr><td><strong>Combo</strong></td><td>Divulgar combos (casal, família)</td></tr>
+<tr><td><strong>Relâmpago</strong></td><td>Promoção urgente, por tempo limitado</td></tr>
+<tr><td><strong>De/Por</strong></td><td>Mostrar preço antigo riscado e preço novo (ex: <s>R$20</s> por R$14)</td></tr>
+<tr><td><strong>Fim de Semana</strong></td><td>Posts de sexta, sábado e domingo</td></tr>
+<tr><td><strong>Data Especial</strong></td><td>Dia dos Namorados, Natal, Black Friday, Copa, etc.</td></tr>
+<tr><td><strong>Novidade</strong></td><td>Produto novo no cardápio</td></tr>
+<tr><td><strong>Depoimento</strong></td><td>Mostrar a nota 4.9 do iFood e depoimento de cliente</td></tr>
+<tr><td><strong>Copa 2026</strong></td><td>Posts temáticos dos jogos da Copa do Mundo</td></tr>
+<tr><td><strong>Cardápio</strong></td><td>Vitrine com 6 sanduíches, foto e preço</td></tr>
+<tr><td><strong>Leve 1, 2° Metade</strong></td><td>Promoção "leve 1 e o segundo sai pela metade"</td></tr>
+<tr><td><strong>Entrega Grátis</strong></td><td>Divulgar entrega grátis para pedidos acima de R$60</td></tr>
+<tr><td><strong>Horário</strong></td><td>Post informativo: aberto das 18h à 01h todo dia</td></tr>
+<tr><td><strong>Bastidores</strong></td><td>Moldura para foto dos bastidores da cozinha</td></tr>
+</table>
+<div class="tip"><strong>Dica:</strong> Cada template gera um selo diferente no topo do post (PROMOÇÃO, COMBO, RELÂMPAGO, OFERTA, etc.) para que nunca haja texto repetido na imagem.</div>
+
+<h3>3.2 Escolher o Estilo Visual</h3>
+<p>Cada estilo muda completamente a aparência do post — títulos, preços, bordas da foto e o botão "PEÇA JÁ".</p>
+<table>
+<tr><th>Estilo</th><th>Visual</th><th>Melhor para</th></tr>
+<tr><td><strong>BOLD</strong></td><td>Limpo, forte, tipografia pesada</td><td>Promos do dia, cardápio</td></tr>
+<tr><td><strong>NEON</strong></td><td>Brilhos, letras com glow laranja, noturno</td><td>Relâmpago, fim de semana</td></tr>
+<tr><td><strong>STREET</strong></td><td>Graffiti, sombra vermelha, urbano</td><td>Combos, novidades</td></tr>
+<tr><td><strong>PREMIUM</strong></td><td>Elegante, dourado, bordas finas</td><td>Depoimento, dados especiais</td></tr>
+<tr><td><strong>RETRO</strong></td><td>Vintage, raios de sol, amarelo</td><td>Copa 2026, diversão</td></tr>
+</table>
+
+<h3>3.3 Escolher o Formato</h3>
+<table>
+<tr><th>Formato</th><th>Dimensão</th><th>Uso</th></tr>
+<tr><td><strong>Feed 1:1</strong></td><td>1080 x 1080 px</td><td>Post quadrado do feed do Instagram</td></tr>
+<tr><td><strong>Story 9:16</strong></td><td>1080 x 1920 px</td><td>Story vertical do Instagram</td></tr>
+</table>
+<div class="tip"><strong>Importante:</strong> O formato Story é o mais usado. Todos os elementos (textos, preços, botão) se adaptam automaticamente ao formato escolhido.</div>
+
+<h3>3.4 Escolher o Produto</h3>
+<p>Lista com todos os produtos do cardápio. Use as <strong>abas de categoria</strong> no topo para filtrar:</p>
+<p>
+<span class="badge badge-orange">Todos</span>
+<span class="badge badge-orange">Sanduíches</span>
+<span class="badge badge-orange">Combos</span>
+<span class="badge badge-orange">Porções</span>
+<span class="badge badge-orange">Açaí</span>
+<span class="badge badge-orange">Sobremesas</span>
+<span class="badge badge-orange">Milkshake</span>
+</p>
+<p>Ao clicar num produto, o título e preço atualizam automaticamente no preview.</p>
+
+<h3>3.5 Personalizar os Textos</h3>
+<table>
+<tr><th>Campo</th><th>O que colocar</th></tr>
+<tr><td><strong>Título</strong></td><td>Texto principal grande (ex: "PROMO DO DIA", "COPA 2026")</td></tr>
+<tr><td><strong>Preço / Subtítulo</strong></td><td>Preço ou informação secundária (ex: "R$14", "18h às 01h")</td></tr>
+<tr><td><strong>Preço antigo</strong></td><td>Se preencher, aparece riscado ao lado do atual (efeito De/Por)</td></tr>
+<tr><td><strong>Texto Extra</strong></td><td>Frase curta embaixo (ex: "Só hoje!", "Pedidos acima de R$60!")</td></tr>
+</table>
+<div class="tip"><strong>Dica:</strong> Todos os campos são editáveis — pode mudar qualquer texto à vontade antes de exportar!</div>
+
+<h3>3.6 Escolher Badge / Selo (opcional)</h3>
+<p>20 selos com formas e cores diferentes. Cada um tem um visual próprio (círculo, pílula, faixa diagonal, escudo ou explosão):</p>
+<table>
+<tr><th>Categoria</th><th>Selos</th><th>Forma</th></tr>
+<tr><td><strong>Desconto</strong></td><td>-10%, -20%, -30%, -50%</td><td>Círculo / Explosão</td></tr>
+<tr><td><strong>Urgência</strong></td><td>SÓ HOJE, ÚLTIMAS!, ESGOTANDO</td><td>Pílula</td></tr>
+<tr><td><strong>Novidade</strong></td><td>NOVO, LANÇAMENTO</td><td>Pílula / Faixa</td></tr>
+<tr><td><strong>Social</strong></td><td>MAIS VENDIDO, FAVORITO, CAMPEÃO</td><td>Faixa / Escudo</td></tr>
+<tr><td><strong>Promos</strong></td><td>GRÁTIS, IMPERDÍVEL, EXCLUSIVO, LIMITADO</td><td>Explosão / Pílula</td></tr>
+<tr><td><strong>Temáticos</strong></td><td>COPA 2026, FRETE GRÁTIS, 1° PEDIDO</td><td>Pílula / Faixa / Círculo</td></tr>
+</table>
+<div class="tip"><strong>Dica:</strong> O visual do selo se adapta ao estilo escolhido — Neon adiciona brilho, Street adiciona sombra, Premium adiciona espaçamento, Retro adiciona sombra sólida.</div>
+
+<h3>3.7 Escolher Cor de Fundo</h3>
+<p>12 opções — 6 cores sólidas (vermelho, preto, laranja, verde, azul marinho, roxo) + 6 degradês. Clique na bolinha de cor desejada.</p>
+
+<h3>3.8 Botões de Ação</h3>
+<table>
+<tr><th>Botão</th><th>O que faz</th></tr>
+<tr><td><strong>Baixar PNG</strong></td><td>Salva a imagem no computador, pronta pra postar no Instagram. Cada download tem nome único (não sobrescreve).</td></tr>
+<tr><td><strong>Copiar Legenda</strong></td><td>Copia texto da legenda pro Ctrl+V — colar no Instagram</td></tr>
+<tr><td><strong>WhatsApp</strong></td><td>Abre o WhatsApp com mensagem pronta do produto selecionado</td></tr>
+<tr><td><strong>Salvar</strong></td><td>Salva a combinação atual como favorito para usar depois</td></tr>
+<tr><td><strong>Aleatório</strong></td><td>Gera combinação aleatória — bom pra inspiração</td></tr>
+</table>
+
+<hr>
+
+<h2 id="favoritos">4. Favoritos</h2>
+<p>Quando achar uma combinação que ficou boa, clique em <strong>Salvar</strong>. Ela aparece na seção <strong>"Favoritos Salvos"</strong> no final do painel esquerdo.</p>
+<table>
+<tr><th>Ação</th><th>Como</th></tr>
+<tr><td>Aplicar um favorito</td><td>Clique nele na lista — carrega template, estilo, cor, badge e produto</td></tr>
+<tr><td>Excluir um favorito</td><td>Clique no X ao lado</td></tr>
+</table>
+<div class="tip"><strong>Atenção:</strong> Os favoritos ficam salvos no navegador (localStorage). Se limpar os dados do navegador, eles se perdem.</div>
+
+<hr>
+
+<h2 id="calendario">5. Calendário de Conteúdo</h2>
+<p>Navegue pelos meses com <strong>← Anterior</strong> e <strong>Próximo →</strong>.</p>
+
+<h3>Como funciona o ciclo de 4 semanas</h3>
+<p>Cada semana do mês tem uma <strong>estratégia diferente</strong> que rota automaticamente:</p>
+<table>
+<tr><th>Semana</th><th>Estratégia</th><th>Cor</th><th>Objetivo</th></tr>
+<tr><td><strong>Semana 1</strong></td><td>Aquisição</td><td><span class="badge badge-blue">Azul</span></td><td>Atrair clientes novos para conhecer o Point</td></tr>
+<tr><td><strong>Semana 2</strong></td><td>Engajamento</td><td><span class="badge badge-purple">Roxo</span></td><td>Criar comunidade, gerar interação e conexão</td></tr>
+<tr><td><strong>Semana 3</strong></td><td>Conversão</td><td><span class="badge badge-green">Verde</span></td><td>Transformar seguidores em pedidos reais</td></tr>
+<tr><td><strong>Semana 4</strong></td><td>Fidelização</td><td><span class="badge badge-pink">Rosa</span></td><td>Recompensar e reter quem já comprou</td></tr>
+</table>
+
+<h3>O que cada dia mostra</h3>
+<p>Cada dia do calendário exibe:</p>
+<ul>
+<li>A <strong>promoção do dia</strong> (Segunda da Fome, Terça Dupla, etc.)</li>
+<li>O <strong>formato sugerido</strong>: <span class="badge badge-purple">story</span> <span class="badge badge-blue">feed</span> ou <span class="badge badge-pink">reels</span></li>
+<li><strong>Passe o mouse</strong> em cima do dia para ver a ideia de conteúdo + estratégia</li>
+</ul>
+
+<h3>Datas especiais</h3>
+<p>Datas comemorativas (Dia dos Namorados, Copa, Black Friday, Natal...) aparecem em <span class="badge badge-pink">rosa</span> e têm prioridade sobre a promoção fixa do dia.</p>
+<div class="tip"><strong>Dica:</strong> A Copa do Mundo 2026 está mapeada (11/Jun início — 19/Jul final). Planeje conteúdo temático com antecedência!</div>
+
+<hr>
+
+<h2 id="plano">6. Plano Semanal de Conteúdo</h2>
+<p>O plano semanal mostra <strong>28 sugestões de conteúdo</strong> — 7 dias para cada uma das 4 estratégias.</p>
+
+<h3>Como usar</h3>
+<ol class="steps">
+<li>Clique na <strong>aba da estratégia</strong> da semana atual (Aquisição, Engajamento, Conversão ou Fidelização)</li>
+<li>Veja os 7 cards — um por dia da semana</li>
+<li>Cada card mostra: promoção fixa + formato + ideia de conteúdo + estratégia + hashtags</li>
+<li>Use a ideia como guia para criar o post do dia no gerador</li>
+</ol>
+
+<h3>Promoções fixas da semana</h3>
+<p>As promoções do dia são as mesmas em todas as 4 estratégias — o que muda é o <strong>tipo de conteúdo</strong> e a <strong>abordagem</strong>:</p>
+<table>
+<tr><th>Dia</th><th>Promoção</th><th>Produto</th></tr>
+<tr><td><strong>Segunda</strong></td><td>Segunda da Fome — Big Burgão + refri por R$12</td><td>BIG BURGÃO</td></tr>
+<tr><td><strong>Terça</strong></td><td>Terça Dupla — Duplo Cheddar por R$12</td><td>DUPLO CHEDDAR</td></tr>
+<tr><td><strong>Quarta</strong></td><td>Quarta X-TUDO — X-Tudo + fritas por R$18</td><td>X-TUDO</td></tr>
+<tr><td><strong>Quinta</strong></td><td>Quinta da Montanha — X-Montanha por R$16</td><td>X-MONTANHA</td></tr>
+<tr><td><strong>Sexta</strong></td><td>Sexta em Família — Combo Família 3 por R$69,90</td><td>COMBO FAMÍLIA 3</td></tr>
+<tr><td><strong>Sábado</strong></td><td>Sabadão do Point — Mega X-Montanha + fritas + refri R$35</td><td>MEGA X-MONTANHA</td></tr>
+<tr><td><strong>Domingo</strong></td><td>Domingão Doce — Lanche + Pavê por R$5 extra</td><td>PAVÊ DE CHOCOLATE</td></tr>
+</table>
+
+<h3>Exemplo prático</h3>
+<div class="tip-blue tip"><strong>Exemplo — Terça, Semana de Engajamento:</strong><br>
+Promoção: Terça Dupla (Duplo Cheddar por R$12)<br>
+Formato: Feed<br>
+Conteúdo: Post "Marque quem come DOIS lanches sozinho"<br>
+Estratégia: Marcações expandem alcance orgânico de graça<br>
+Hashtags: #TercaDupla #MarcaOAmigo</div>
+
+<hr>
+
+<h2 id="copies">7. Banco de Copies</h2>
+<p><strong>11 categorias</strong> com mais de 50 textos prontos para legendas do Instagram:</p>
+<table>
+<tr><th>Categoria</th><th>Qtd</th><th>Uso</th></tr>
+<tr><td>Promoção</td><td>5</td><td>Posts de promo diária</td></tr>
+<tr><td>Combo</td><td>3</td><td>Divulgação de combos</td></tr>
+<tr><td>Final de Semana</td><td>3</td><td>Sexta, sábado e domingo</td></tr>
+<tr><td>Data Especial</td><td>3</td><td>Feriados e datas comemorativas</td></tr>
+<tr><td>Depoimento</td><td>2</td><td>Mostrar autoridade (4.9 iFood)</td></tr>
+<tr><td>Engajamento</td><td>3</td><td>Enquetes, marcações, interação</td></tr>
+<tr><td>Entrega Grátis</td><td>3</td><td>Divulgar entrega sem taxa</td></tr>
+<tr><td>Metade do Preço</td><td>3</td><td>Promo "leve 1, 2° pela metade"</td></tr>
+<tr><td>Stories</td><td>5</td><td>Textos curtos para stories — direto ao ponto</td></tr>
+<tr><td>Ganchos</td><td>5</td><td>Hooks estratégicos para abrir posts (FOMO, curiosidade, listas)</td></tr>
+<tr><td>Fidelização</td><td>3</td><td>Retenção de clientes — VIP, agradecimento, discovery</td></tr>
+</table>
+<div class="tip"><strong>Como usar:</strong> Clique na categoria → clique no card do texto → ele é <strong>copiado automaticamente</strong>. Cole no Instagram com Ctrl+V. Os textos trocam {produto} e {preco} pelo produto que está selecionado no gerador.</div>
+
+<div class="tip-green tip"><strong>Novidade — Stories e Ganchos:</strong> Use "Stories" para stories do Instagram (texto curto, direto). Use "Ganchos" para a primeira frase de posts no feed — são hooks testados que prendem atenção.</div>
+
+<hr>
+
+<h2 id="anuncios">8. Criador de Anúncios</h2>
+<p>Página com <strong>19 copies prontas para tráfego pago</strong> (Instagram Ads e Facebook Ads), organizadas por etapa do funil de vendas.</p>
+
+<h3>Como funciona</h3>
+<ol class="steps">
+<li>Selecione o <strong>produto base</strong> no seletor (as variáveis {produto}, {preco}, etc. serão preenchidas automaticamente)</li>
+<li>Clique na <strong>aba do objetivo</strong> desejado</li>
+<li>Veja os cards com headline, corpo, CTA e dica de segmentação</li>
+<li>Clique em <strong>Copiar</strong> para copiar a copy completa</li>
+</ol>
+
+<h3>5 Objetivos disponíveis</h3>
+<table>
+<tr><th>Objetivo</th><th>Qtd</th><th>Quando usar</th></tr>
+<tr><td><strong>Atrair</strong></td><td>4</td><td>Público frio — quem ainda não conhece o Point</td></tr>
+<tr><td><strong>Converter</strong></td><td>4</td><td>Público morno — já viu algo, precisa do empurrão final</td></tr>
+<tr><td><strong>Prova Social</strong></td><td>3</td><td>Usar autoridade: 4.9 iFood, 200+ pedidos/dia, depoimentos</td></tr>
+<tr><td><strong>Urgência</strong></td><td>4</td><td>Criar FOMO: promos relâmpago, últimas unidades, "só hoje"</td></tr>
+<tr><td><strong>Remarketing</strong></td><td>4</td><td>Público quente — já comprou ou interagiu, trazer de volta</td></tr>
+</table>
+
+<h3>Guia de Estratégia</h3>
+<p>Na parte inferior da página há 6 cards com orientações práticas:</p>
+<ul>
+<li><strong>Segmentação Geográfica</strong> — raio de 3-5km a partir de Realengo</li>
+<li><strong>Público-Alvo</strong> — 18-45 anos, interesse em fast food e delivery</li>
+<li><strong>Melhores Horários</strong> — 17h-21h (pico de fome e pedidos)</li>
+<li><strong>Budget Sugerido</strong> — começar com R$10-20/dia, escalar o que converte</li>
+<li><strong>Criativos que Convertem</strong> — foto real > arte genérica, vídeo curto > imagem estática</li>
+<li><strong>Funil de Anúncios</strong> — Atrair (frio) → Converter (morno) → Remarketing (quente)</li>
+</ul>
+<div class="tip"><strong>Cada card tem uma dica de segmentação</strong> específica (ex: "Segmente quem já interagiu com o perfil" ou "Concentre budget entre 18h-22h"). Use essas dicas ao configurar o anúncio no Gerenciador de Anúncios do Meta.</div>
+
+<hr>
+
+<h2 id="rotina">9. Rotina Diária Recomendada</h2>
+<ol class="steps">
+<li>Abrir o dashboard (duplo clique no <code>index.html</code>)</li>
+<li>Ver o <strong>Calendário</strong> — checar qual é a estratégia da semana e o formato sugerido pro dia</li>
+<li>Ir no <strong>Plano Semanal</strong> — ler a ideia de conteúdo e a estratégia para o dia</li>
+<li>Ir em <strong>Criar Post</strong> → escolher template, estilo, produto e formato sugeridos</li>
+<li>Ajustar textos, cor e badge conforme necessário</li>
+<li>Clicar em <strong>Baixar PNG</strong> → imagem salva no computador</li>
+<li>Ir em <strong>Banco de Copies</strong> → copiar a legenda que combina (usar categoria "Stories" se for story, "Ganchos" se for feed)</li>
+<li>Postar no Instagram: imagem + legenda colada</li>
+<li>Se quiser mandar promo pelo zap → clicar em <strong>WhatsApp</strong></li>
+<li>Se tiver budget de anúncio → ir em <strong>Anúncios</strong> para pegar a copy</li>
+</ol>
+
+<div class="tip-green tip"><strong>Ciclo mensal:</strong><br>
+<strong>Semana 1</strong>: Foco em atrair gente nova (conteúdo de impacto, preços, reels)<br>
+<strong>Semana 2</strong>: Foco em engajar (enquetes, bastidores, marcações)<br>
+<strong>Semana 3</strong>: Foco em converter (promos, urgência, frete grátis)<br>
+<strong>Semana 4</strong>: Foco em fidelizar (depoimentos, agradecimentos, promos VIP)</div>
+
+<hr>
+
+<h2 id="dados">10. Dados do Negócio</h2>
+<table>
+<tr><th>Info</th><th>Valor</th></tr>
+<tr><td><strong>Nome</strong></td><td>Point da Lomas — Lanchonete</td></tr>
+<tr><td><strong>Endereço</strong></td><td>R. Lomas Valentinas, 104 — Realengo, RJ</td></tr>
+<tr><td><strong>Horário</strong></td><td>18h às 01h — todos os dias</td></tr>
+<tr><td><strong>WhatsApp</strong></td><td>(21) 96608-3951</td></tr>
+<tr><td><strong>Instagram</strong></td><td>@pointdalomas</td></tr>
+<tr><td><strong>iFood</strong></td><td>4.9 estrelas — 200-300 pedidos/dia</td></tr>
+<tr><td><strong>Site</strong></td><td>pointdalomas.com.br</td></tr>
+<tr><td><strong>Slogan</strong></td><td>"Deus é Fiel!"</td></tr>
+</table>
+
+<h3>Identidade Visual</h3>
+<table>
+<tr><th>Elemento</th><th>Valor</th></tr>
+<tr><td>Preto (fundo)</td><td>#0D0D0D</td></tr>
+<tr><td>Laranja (destaque)</td><td>#E8922D</td></tr>
+<tr><td>Vermelho (acento)</td><td>#C41E2A</td></tr>
+<tr><td>Dourado (premium)</td><td>#D4A531</td></tr>
+</table>
+
+<hr>
+
+<div style="text-align:center;margin-top:32px;padding:20px;background:#0D0D0D;border-radius:12px;color:white;">
+<p style="font-size:18px;font-weight:800;color:#E8922D;margin-bottom:4px;">Point da Lomas — Marketing Hub v3</p>
+<p style="font-size:11px;color:#888;">14 templates · 5 estilos · 20 badges · 12 cores · 11 categorias de copies · 19 copies de anúncio · 28 sugestões de conteúdo</p>
+<p style="font-size:11px;color:#666;margin-top:8px;">R. Lomas Valentinas, 104 — Realengo, RJ · (21) 96608-3951</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Point da Lomas — Marketing Hub v2</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Permanent+Marker&family=Bangers&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0D0D0D;--dark:#1A1A1A;--dark2:#232323;--dark3:#2D2D2D;--orange:#E8922D;--orange-light:#F5A623;--red:#C41E2A;--red-dark:#9B1B24;--gold:#D4A531;--white:#FFF;--gray:#888;--gray-light:#AAA;--green:#22C55E;--blue:#3B82F6;--purple:#8B5CF6;--pink:#EC4899;--yellow:#FACC15}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--dark3);border-radius:3px}
+
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--dark);border-right:1px solid var(--dark3);position:fixed;top:0;left:0;bottom:0;z-index:100;display:flex;flex-direction:column}
+.sidebar-logo{padding:24px 20px;border-bottom:1px solid var(--dark3);display:flex;align-items:center;gap:12px}
+.sidebar-logo img{width:48px;height:48px;border-radius:12px}
+.sidebar-logo .brand{font-size:14px;font-weight:700;color:var(--orange)}
+.sidebar-logo .sub{font-size:11px;color:var(--gray)}
+.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;cursor:pointer;transition:all .2s;color:var(--gray-light);font-size:13px;font-weight:500}
+.nav-item:hover{background:var(--dark2);color:var(--white)}
+.nav-item.active{background:linear-gradient(135deg,var(--orange),var(--red));color:var(--white);font-weight:600}
+.nav-item svg{width:20px;height:20px;flex-shrink:0}
+.sidebar-stats{padding:16px 20px;border-top:1px solid var(--dark3)}
+.stat-badge{background:var(--dark2);border-radius:10px;padding:12px;margin-bottom:8px}
+.stat-badge .label{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+.stat-badge .value{font-size:20px;font-weight:800;color:var(--orange)}
+
+.main{flex:1;margin-left:260px}
+.page{display:none;padding:32px}.page.active{display:block}
+.page-title{font-size:28px;font-weight:800;margin-bottom:8px}
+.page-sub{font-size:14px;color:var(--gray);margin-bottom:32px}
+
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:32px}
+.card{background:var(--dark);border:1px solid var(--dark3);border-radius:16px;padding:24px;transition:all .3s;cursor:pointer}
+.card:hover{border-color:var(--orange);transform:translateY(-2px)}
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--orange)}
+.card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.card p{font-size:12px;color:var(--gray);line-height:1.5}
+
+/* GENERATOR */
+.generator-layout{display:grid;grid-template-columns:360px 1fr;gap:32px}
+.gen-panel{background:var(--dark);border:1px solid var(--dark3);border-radius:16px;padding:24px;max-height:calc(100vh - 120px);overflow-y:auto}
+.gen-section{margin-bottom:20px}
+.gen-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:10px}
+.template-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.template-btn{padding:10px 6px;border-radius:8px;border:2px solid var(--dark3);background:var(--dark2);color:var(--white);cursor:pointer;font-size:10px;font-weight:600;font-family:inherit;transition:all .2s;text-align:center}
+.template-btn:hover{border-color:var(--orange)}
+.template-btn.active{border-color:var(--orange);background:rgba(232,146,45,.15)}
+.template-btn .icon{display:flex;align-items:center;justify-content:center;margin:0 auto 4px;height:24px;color:var(--orange)}
+.template-btn.active .icon{color:var(--white)}
+.card-icon svg{width:26px;height:26px}
+
+.style-grid{display:flex;gap:6px;flex-wrap:wrap}
+.style-btn{padding:6px 12px;border-radius:6px;border:2px solid var(--dark3);background:var(--dark2);color:var(--gray);cursor:pointer;font-size:10px;font-weight:700;font-family:inherit;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.style-btn:hover{border-color:var(--orange);color:var(--white)}
+.style-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(232,146,45,.1)}
+
+.format-toggle{display:flex;gap:8px}
+.format-btn{flex:1;padding:10px;border-radius:8px;border:2px solid var(--dark3);background:var(--dark2);color:var(--gray);cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:all .2s;text-align:center}
+.format-btn.active{border-color:var(--orange);color:var(--white);background:rgba(232,146,45,.15)}
+
+.product-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto}
+.product-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:2px solid transparent;background:var(--dark2);cursor:pointer;transition:all .2s}
+.product-item:hover{border-color:var(--dark3)}
+.product-item.selected{border-color:var(--orange);background:rgba(232,146,45,.1)}
+.product-item img{width:36px;height:36px;border-radius:6px;object-fit:cover}
+.product-item .info{flex:1}
+.product-item .name{font-size:10px;font-weight:600}
+.product-item .price{font-size:10px;color:var(--orange)}
+
+.gen-input{width:100%;padding:10px 14px;border-radius:8px;border:1px solid var(--dark3);background:var(--dark2);color:var(--white);font-family:inherit;font-size:13px;outline:none;transition:border .2s}
+.gen-input:focus{border-color:var(--orange)}
+.gen-row{display:flex;gap:8px}
+.gen-row .gen-input{flex:1}
+
+.badge-grid{display:flex;gap:5px;flex-wrap:wrap}
+.badge-btn{padding:4px 8px;border-radius:6px;border:2px solid var(--dark3);background:var(--dark2);color:var(--gray);cursor:pointer;font-size:9px;font-weight:700;font-family:inherit;transition:all .2s}
+.badge-btn:hover{border-color:var(--orange);color:var(--white)}
+.badge-btn.active{border-color:var(--yellow);color:var(--yellow);background:rgba(250,204,21,.1)}
+.badge-btn .badge-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+
+.color-row{display:flex;gap:6px;flex-wrap:wrap}
+.color-swatch{width:32px;height:32px;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:all .2s}
+.color-swatch.active{border-color:var(--white);transform:scale(1.15)}
+.color-swatch.grad{background-size:cover}
+
+.preview-area{display:flex;flex-direction:column;align-items:center;gap:20px}
+.preview-frame{background:var(--dark);border:1px solid var(--dark3);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:center}
+.export-btns{display:flex;gap:12px}
+.btn{padding:12px 24px;border-radius:10px;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--orange),var(--red));color:var(--white)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(232,146,45,.3)}
+.btn-secondary{background:var(--dark2);border:1px solid var(--dark3);color:var(--white)}
+.btn-secondary:hover{border-color:var(--orange)}
+.btn-sm{padding:8px 16px;font-size:11px}
+
+.post-canvas{position:relative;overflow:hidden;border-radius:4px}
+.post-canvas.feed{width:540px;height:540px}
+.post-canvas.story{width:360px;height:640px}
+
+/* CALENDAR */
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:32px}
+.cal-header{padding:12px;text-align:center;font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase}
+.cal-day{background:var(--dark);border:1px solid var(--dark3);border-radius:10px;min-height:100px;padding:10px;cursor:pointer;transition:all .2s}
+.cal-day:hover{border-color:var(--orange)}
+.cal-day.today{border-color:var(--orange);background:rgba(232,146,45,.08)}
+.cal-day.other-month{opacity:.3}
+.cal-day .day-num{font-size:14px;font-weight:700;margin-bottom:6px}
+.cal-day .day-event{font-size:9px;padding:3px 6px;border-radius:4px;margin-bottom:3px;font-weight:600;line-height:1.3}
+.cal-day .day-event.promo{background:rgba(232,146,45,.2);color:var(--orange)}
+.cal-day .day-event.date{background:rgba(236,72,153,.2);color:var(--pink)}
+.cal-day .day-event.weekly{background:rgba(34,197,94,.2);color:var(--green)}
+.cal-month-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.cal-month-nav h2{font-size:22px;font-weight:800}
+.cal-month-nav button{padding:8px 16px;border-radius:8px;border:1px solid var(--dark3);background:var(--dark);color:var(--white);cursor:pointer;font-family:inherit;font-weight:600}
+
+.weekly-plan{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:32px}
+.week-day-card{background:var(--dark);border:1px solid var(--dark3);border-radius:12px;padding:16px;transition:border-color .2s}
+.week-day-card:hover{border-color:var(--orange)}
+.week-day-card h4{font-size:13px;font-weight:700;margin-bottom:8px;color:var(--orange)}
+.week-day-card .wk-promo{font-size:15px;font-weight:800;color:var(--white);margin-bottom:6px}
+.week-day-card .wk-promo-desc{font-size:11px;color:var(--gray-light);margin-bottom:10px}
+.week-day-card .wk-content{font-size:11px;color:var(--white);line-height:1.5;margin-bottom:6px;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:8px;border-left:3px solid var(--orange)}
+.week-day-card .wk-estrategia{font-size:10px;color:var(--gray);font-style:italic;line-height:1.4;margin-bottom:8px}
+.week-day-card .wk-hashtags{font-size:9px;color:var(--orange);opacity:.7;word-break:break-all}
+.week-day-card .wk-formato{display:inline-block;font-size:9px;padding:2px 8px;border-radius:4px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.week-day-card .wk-formato.story{background:rgba(139,92,246,.15);color:#A78BFA}
+.week-day-card .wk-formato.feed{background:rgba(59,130,246,.15);color:#60A5FA}
+.week-day-card .wk-formato.reels{background:rgba(236,72,153,.15);color:#F472B6}
+.week-theme-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.week-theme-btn{padding:10px 20px;border-radius:10px;border:2px solid var(--dark3);background:var(--dark);color:var(--gray);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:all .2s;display:flex;align-items:center;gap:8px}
+.week-theme-btn:hover{border-color:var(--orange);color:var(--white)}
+.week-theme-btn.active{color:var(--white);font-weight:800}
+.week-theme-desc{font-size:13px;color:var(--gray-light);margin-bottom:24px;padding:12px 16px;border-radius:10px;background:var(--dark);border:1px solid var(--dark3)}
+.cal-week-label{grid-column:1/-1;padding:6px 12px;font-size:10px;font-weight:700;border-radius:6px;letter-spacing:1px;text-transform:uppercase}
+.cal-day .day-content{font-size:8px;padding:2px 5px;border-radius:3px;margin-top:2px;font-weight:600;line-height:1.2}
+.cal-day .day-content.ct-story{background:rgba(139,92,246,.15);color:#A78BFA}
+.cal-day .day-content.ct-feed{background:rgba(59,130,246,.15);color:#60A5FA}
+.cal-day .day-content.ct-reels{background:rgba(236,72,153,.15);color:#F472B6}
+
+.copy-categories{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.copy-cat-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--dark3);background:var(--dark);color:var(--gray);cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;transition:all .2s}
+.copy-cat-btn.active{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.copy-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.copy-card{background:var(--dark);border:1px solid var(--dark3);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;position:relative}
+.copy-card:hover{border-color:var(--orange)}
+.copy-card .copy-text{font-size:13px;line-height:1.6;margin-bottom:8px}
+.copy-card .copy-tag{font-size:10px;color:var(--gray)}
+.copy-card .copy-btn{position:absolute;top:12px;right:12px;background:var(--dark2);border:1px solid var(--dark3);color:var(--orange);padding:4px 10px;border-radius:6px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:600;opacity:0;transition:opacity .2s}
+.copy-card:hover .copy-btn{opacity:1}
+.copied-toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:var(--white);padding:12px 24px;border-radius:10px;font-size:13px;font-weight:600;z-index:999;display:none;animation:slideUp .3s}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.upcoming-list{display:flex;flex-direction:column;gap:12px}
+.upcoming-item{display:flex;align-items:center;gap:16px;background:var(--dark);border:1px solid var(--dark3);border-radius:12px;padding:16px}
+.upcoming-date{width:56px;height:56px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.upcoming-date .day{font-size:20px;font-weight:800}
+.upcoming-date .month{font-size:10px;font-weight:600;text-transform:uppercase}
+.upcoming-info h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.upcoming-info p{font-size:12px;color:var(--gray)}
+
+.cat-filter{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
+.cat-filter-btn{padding:4px 10px;border-radius:12px;border:1px solid var(--dark3);background:var(--dark2);color:var(--gray);cursor:pointer;font-family:inherit;font-size:9px;font-weight:600;transition:all .2s}
+.cat-filter-btn:hover{color:var(--white);border-color:var(--orange)}
+.cat-filter-btn.active{background:var(--orange);color:var(--black);border-color:var(--orange)}
+.fav-section{margin-top:12px;padding-top:12px;border-top:1px solid var(--dark3)}
+.fav-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;background:var(--dark2);cursor:pointer;transition:all .2s;margin-bottom:4px;font-size:10px;color:var(--gray-light)}
+.fav-item:hover{background:var(--dark3);color:var(--white)}
+.fav-item .fav-del{margin-left:auto;color:var(--red);cursor:pointer;font-size:14px;font-weight:700;opacity:.4;line-height:1}
+.fav-item .fav-del:hover{opacity:1}
+.btn-whatsapp{background:#25D366;color:white}
+.btn-whatsapp:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-fav{background:var(--dark2);border:1px solid var(--yellow);color:var(--yellow)}
+.btn-fav:hover{background:rgba(250,204,21,.1)}
+
+/* ADS PAGE */
+.ad-obj-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.ad-obj-btn{padding:10px 20px;border-radius:10px;border:2px solid var(--dark3);background:var(--dark);color:var(--gray);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:all .2s}
+.ad-obj-btn:hover{border-color:var(--orange);color:var(--white)}
+.ad-obj-btn.active{border-color:var(--orange);background:var(--orange);color:var(--black)}
+.ad-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.ad-card{background:var(--dark);border:1px solid var(--dark3);border-radius:16px;padding:24px;transition:all .3s;position:relative}
+.ad-card:hover{border-color:var(--orange)}
+.ad-card-type{display:inline-block;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:700;margin-bottom:12px}
+.ad-card h3{font-size:15px;font-weight:800;color:var(--white);margin-bottom:8px;line-height:1.3}
+.ad-card-body{font-size:12px;color:var(--gray-light);line-height:1.7;margin-bottom:12px;white-space:pre-line}
+.ad-card-cta{display:inline-block;padding:5px 14px;border-radius:20px;background:var(--orange);color:var(--black);font-size:10px;font-weight:800;margin-bottom:8px}
+.ad-card-copy{position:absolute;top:16px;right:16px;background:var(--dark2);border:1px solid var(--dark3);color:var(--orange);padding:6px 14px;border-radius:8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700;opacity:0;transition:opacity .2s}
+.ad-card:hover .ad-card-copy{opacity:1}
+.ad-card-tip{font-size:10px;color:var(--gray);font-style:italic;border-top:1px solid var(--dark3);padding-top:8px;margin-top:8px}
+.strategy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:32px}
+.strategy-card{background:var(--dark);border:1px solid var(--dark3);border-radius:12px;padding:20px}
+.strategy-card h4{font-size:13px;font-weight:700;color:var(--orange);margin-bottom:10px}
+.strategy-card ul{padding:0;margin:0}
+.strategy-card li{font-size:11px;color:var(--gray-light);line-height:1.8;list-style:none;padding:2px 0}
+.strategy-card li::before{content:"→ ";color:var(--orange);font-weight:700}
+.ad-prod-select{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:16px;background:var(--dark);border:1px solid var(--dark3);border-radius:12px}
+.ad-prod-select img{width:48px;height:48px;border-radius:10px;object-fit:cover}
+.ad-prod-select select{flex:1;padding:10px 14px;border-radius:8px;border:1px solid var(--dark3);background:var(--dark2);color:var(--white);font-family:inherit;font-size:13px;font-weight:600;outline:none}
+.ad-prod-select select:focus{border-color:var(--orange)}
+
+@media(max-width:1200px){.generator-layout{grid-template-columns:1fr}.post-canvas.feed{width:400px;height:400px}.post-canvas.story{width:270px;height:480px}.weekly-plan{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://storage.googleapis.com/prod-cardapio-web/uploads/company/logo/5560/thumb_beb79298LOGO_Site.jpg" alt="Logo">
+      <div><div class="brand">Point da Lomas</div><div class="sub">Marketing Hub v2</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-page="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
+      <div class="nav-item" data-page="generator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="9" y2="9"/></svg>Criar Post</div>
+      <div class="nav-item" data-page="calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendário</div>
+      <div class="nav-item" data-page="weekly"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Plano Semanal</div>
+      <div class="nav-item" data-page="copies"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Banco de Copies</div>
+      <div class="nav-item" data-page="ads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Anúncios</div>
+    </nav>
+    <div class="sidebar-stats">
+      <div class="stat-badge"><div class="label">Avaliação iFood</div><div class="value">4.9 ★</div></div>
+      <div class="stat-badge"><div class="label">Pedidos/dia</div><div class="value">200-300</div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <section class="page active" id="page-dashboard">
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-sub">Visão geral do seu marketing — Point da Lomas</p>
+      <div class="cards-grid">
+        <div class="card" onclick="navigateTo('generator')"><div class="card-icon" style="background:rgba(232,146,45,.15)" id="icon-gen"></div><h3>Criar Post Agora</h3><p>14 templates + 5 estilos visuais + badges e efeitos</p></div>
+        <div class="card" onclick="navigateTo('calendar')"><div class="card-icon" style="background:rgba(236,72,153,.15)" id="icon-cal"></div><h3>Calendário Marketing</h3><p>Datas especiais, feriados e oportunidades de promoção</p></div>
+        <div class="card" onclick="navigateTo('weekly')"><div class="card-icon" style="background:rgba(34,197,94,.15)" id="icon-week"></div><h3>Plano Semanal</h3><p>Sugestões de promoções e posts para cada dia</p></div>
+        <div class="card" onclick="navigateTo('copies')"><div class="card-icon" style="background:rgba(139,92,246,.15)" id="icon-copy"></div><h3>Banco de Copies</h3><p>Frases prontas para legendas e stories</p></div>
+        <div class="card" onclick="navigateTo('ads')"><div class="card-icon" style="background:rgba(196,30,42,.15)" id="icon-ads"></div><h3>Criar Anúncio</h3><p>Copies estratégicas para tráfego pago — Instagram e Facebook Ads</p></div>
+      </div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:16px">Próximas Datas Importantes</h2>
+      <div class="upcoming-list" id="upcoming-dates"></div>
+    </section>
+
+    <!-- GENERATOR -->
+    <section class="page" id="page-generator">
+      <h1 class="page-title">Criar Post</h1>
+      <p class="page-sub">12 templates, 5 estilos visuais, badges e efeitos — tudo customizável</p>
+      <div class="generator-layout">
+        <div class="gen-panel">
+          <div class="gen-section">
+            <div class="gen-label">Template</div>
+            <div class="template-grid" id="template-grid"></div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Estilo Visual</div>
+            <div class="style-grid" id="style-grid"></div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Formato</div>
+            <div class="format-toggle">
+              <button class="format-btn active" data-format="feed">Feed 1:1</button>
+              <button class="format-btn" data-format="story">Story 9:16</button>
+            </div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Produto</div>
+            <div class="product-list" id="product-list"></div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Título</div>
+            <input class="gen-input" id="post-title" value="PROMO DO DIA" oninput="updatePreview()">
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Preço / Subtítulo</div>
+            <div class="gen-row">
+              <input class="gen-input" id="post-subtitle" value="R$9" placeholder="Preço atual" oninput="updatePreview()">
+              <input class="gen-input" id="post-oldprice" value="" placeholder="Preço antigo (ex: R$14)" oninput="updatePreview()">
+            </div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Texto Extra</div>
+            <input class="gen-input" id="post-extra" value="Só hoje! Peça já!" oninput="updatePreview()">
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Badge / Selo</div>
+            <div class="badge-grid" id="badge-grid"></div>
+          </div>
+          <div class="gen-section">
+            <div class="gen-label">Cor / Fundo</div>
+            <div class="color-row" id="color-row"></div>
+          </div>
+          <div class="fav-section">
+            <div class="gen-label">⭐ Favoritos Salvos</div>
+            <div id="fav-list"></div>
+          </div>
+        </div>
+        <div class="preview-area">
+          <div class="preview-frame"><div class="post-canvas feed" id="post-canvas"></div></div>
+          <div class="export-btns">
+            <button class="btn btn-primary" onclick="exportPost()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Baixar PNG</button>
+            <button class="btn btn-secondary" onclick="copyForCaption()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copiar Legenda</button>
+            <button class="btn btn-whatsapp btn-sm" onclick="shareWhatsApp()">📱 WhatsApp</button>
+            <button class="btn btn-fav btn-sm" onclick="saveFavorite()">⭐ Salvar</button>
+            <button class="btn btn-secondary btn-sm" onclick="randomize()">🎲 Aleatório</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="page" id="page-calendar">
+      <h1 class="page-title">Calendário de Marketing</h1>
+      <p class="page-sub">Datas comemorativas, promoções e oportunidades de posts</p>
+      <div class="cal-month-nav">
+        <button onclick="changeMonth(-1)">← Anterior</button>
+        <h2 id="cal-month-title"></h2>
+        <button onclick="changeMonth(1)">Próximo →</button>
+      </div>
+      <div class="calendar-grid" id="calendar-grid"></div>
+      <h2 style="font-size:18px;font-weight:800;margin:24px 0 16px">Legenda</h2>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;padding:4px 10px;border-radius:4px;background:rgba(236,72,153,.2);color:var(--pink);font-size:11px;font-weight:600">Data</span><span style="font-size:12px;color:var(--gray)">Data comemorativa</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;padding:4px 10px;border-radius:4px;background:rgba(34,197,94,.2);color:var(--green);font-size:11px;font-weight:600">Promo</span><span style="font-size:12px;color:var(--gray)">Promoção do dia</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;padding:4px 10px;border-radius:4px;background:rgba(139,92,246,.15);color:#A78BFA;font-size:11px;font-weight:600">Story</span><span style="font-size:12px;color:var(--gray)">Formato story</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;padding:4px 10px;border-radius:4px;background:rgba(59,130,246,.15);color:#60A5FA;font-size:11px;font-weight:600">Feed</span><span style="font-size:12px;color:var(--gray)">Formato feed</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;padding:4px 10px;border-radius:4px;background:rgba(236,72,153,.15);color:#F472B6;font-size:11px;font-weight:600">Reels</span><span style="font-size:12px;color:var(--gray)">Formato reels</span></div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3B82F6"></span><span style="font-size:12px;color:var(--gray)">Sem. 1 — Aquisição</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#8B5CF6"></span><span style="font-size:12px;color:var(--gray)">Sem. 2 — Engajamento</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#22C55E"></span><span style="font-size:12px;color:var(--gray)">Sem. 3 — Conversão</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#EC4899"></span><span style="font-size:12px;color:var(--gray)">Sem. 4 — Fidelização</span></div>
+      </div>
+    </section>
+
+    <!-- WEEKLY -->
+    <section class="page" id="page-weekly">
+      <h1 class="page-title">Plano Semanal de Conteúdo</h1>
+      <p class="page-sub">4 estratégias semanais rotativas — cada semana do mês tem um objetivo diferente</p>
+      <div class="week-theme-tabs" id="week-theme-tabs"></div>
+      <div class="week-theme-desc" id="week-theme-desc"></div>
+      <div class="weekly-plan" id="weekly-plan"></div>
+      <h2 style="font-size:18px;font-weight:800;margin:32px 0 16px">Como Usar o Plano</h2>
+      <div class="cards-grid">
+        <div class="card"><h3 style="color:#3B82F6">Semana 1 — Aquisição</h3><p>Foco em <strong>alcance e descoberta</strong>. Conteúdo visual de impacto, preços agressivos, reels virais. Objetivo: trazer gente nova.</p></div>
+        <div class="card"><h3 style="color:#8B5CF6">Semana 2 — Engajamento</h3><p>Foco em <strong>interação e comunidade</strong>. Enquetes, bastidores, marcações, caixinha de perguntas. Objetivo: criar vínculo.</p></div>
+        <div class="card"><h3 style="color:#22C55E">Semana 3 — Conversão</h3><p>Foco em <strong>vendas diretas</strong>. Flash promos, urgência, frete grátis, De/Por, combos. Objetivo: gerar pedidos.</p></div>
+        <div class="card"><h3 style="color:#EC4899">Semana 4 — Fidelização</h3><p>Foco em <strong>retenção e gratidão</strong>. Depoimentos, rankings, promos exclusivas, agradecimentos. Objetivo: trazer de volta.</p></div>
+      </div>
+    </section>
+
+    <!-- COPIES -->
+    <section class="page" id="page-copies">
+      <h1 class="page-title">Banco de Copies</h1>
+      <p class="page-sub">Textos prontos para legendas — clique para copiar</p>
+      <div class="copy-categories" id="copy-categories"></div>
+      <div class="copy-list" id="copy-list"></div>
+    </section>
+
+    <!-- ADS -->
+    <section class="page" id="page-ads">
+      <h1 class="page-title">Criador de Anúncios</h1>
+      <p class="page-sub">Copies estratégicas para tráfego pago — Instagram e Facebook Ads</p>
+      <div class="ad-prod-select">
+        <img id="ad-prod-img" src="" style="border-radius:10px;">
+        <select id="ad-prod-select" onchange="S.adProduct=parseInt(this.value);updateAdProductImg();renderAds()"></select>
+        <span style="font-size:11px;color:var(--gray);white-space:nowrap;">Produto base para as copies</span>
+      </div>
+      <div class="ad-obj-tabs" id="ad-obj-tabs"></div>
+      <div class="ad-grid" id="ad-grid"></div>
+      <h2 style="font-size:18px;font-weight:800;margin:32px 0 16px">Estratégia de Segmentação — Tráfego Pago</h2>
+      <div class="strategy-grid" id="strategy-grid"></div>
+    </section>
+  </main>
+</div>
+<div class="copied-toast" id="toast">Copiado!</div>
+
+<script>
+// ============================
+// DATA
+// ============================
+const LOGO='https://storage.googleapis.com/prod-cardapio-web/uploads/company/logo/5560/thumb_beb79298LOGO_Site.jpg';
+const PRODUCTS=[
+  {cat:"Sanduiches",name:"BIG BURGAO",price:9,desc:"Pao, hamburguer, cheddar cremoso, alface, tomate e maionese temperada.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473896/bd20a1baBIG_BURG%C3%83O_C_CHEDDAR.png"},
+  {cat:"Sanduiches",name:"X-BURGUER",price:10,desc:"Pao, hamburguer, queijo, alface, tomate e maionese temperada.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473898/6585361cX-BURGUER.png"},
+  {cat:"Sanduiches",name:"X-CALABRESA",price:12,desc:"Pao, hamburguer, queijo, calabresa, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473901/5ba701d2X-CALABRESA.png"},
+  {cat:"Sanduiches",name:"X-EGG",price:12,desc:"Pao, hamburguer, ovo, queijo, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473900/97924febX-EGG.png"},
+  {cat:"Sanduiches",name:"X-BACON",price:13,desc:"Pao, hamburguer, queijo, bacon, alface, tomate e maionese.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473903/9c8f5489X-BACON.png"},
+  {cat:"Sanduiches",name:"DUPLO CHEDDAR",price:14,desc:"Pao, 2 hamburgueres, cheddar cremoso, bacon, alface, tomate.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473906/6e48360fDUPLO_CHEDDAR_C_BACON.png"},
+  {cat:"Sanduiches",name:"X-TUDO",price:14,desc:"Pao, hamburguer, ovo, queijo, bacon, calabresa, alface, tomate.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473912/dd5b43a7X-TUDO.png"},
+  {cat:"Sanduiches",name:"X-CHICKEN",price:15,desc:"Pao, frango empanado, queijo, alface, tomate e maionese gourmet.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/524652/dea0ea49WhatsApp_Image_2023-09-20_at_21.51.56.jpeg"},
+  {cat:"Sanduiches",name:"X-MONTANHA",price:18,desc:"3 Paes, 2 hamburgueres, ovo, 2 queijos, bacon, calabresa.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473919/b0a673b2X-MONTANHA__2_.png"},
+  {cat:"Sanduiches",name:"X-CONTRAFILE",price:20,desc:"Pao, iscas de contrafile ao molho shoyu, ovo, queijo, bacon.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473913/d2dfabfbX-CONTRAFIL%C3%89.png"},
+  {cat:"Sanduiches",name:"DUPLO X-TUDO",price:20,desc:"Pao, 2 hamburgueres, 2 ovos, 2 queijos, 4 bacons, 4 calabresas.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473923/5dafdee5DUPLO_X-TUDO.png"},
+  {cat:"Sanduiches",name:"MEGA X-MONTANHA",price:28,desc:"Pao, 4 hamburgueres, 2 ovos, 4 queijos, 4 bacons, 4 calabresas.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473924/c71a80bbMEGA_X-MONTANHA.png"},
+  {cat:"Combos",name:"COMBO CASAL",price:47,desc:"2 lanches + batata frita + refrigerante 1L.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/959390/4f73ea4cPROMO_1.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 3",price:78,desc:"Combo para 3 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473503/914f9768COMBO_2.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 4",price:88,desc:"Combo para 4 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473504/78111138COMBO_3.png"},
+  {cat:"Combos",name:"COMBO FAMILIA 5",price:100,desc:"Combo para 5 pessoas com acompanhamentos.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473505/2f9eeb94COMBO_4.png"},
+  {cat:"Porcoes",name:"BATATA FRITA",price:12,desc:"Batata frita crocante.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473515/28528712FRITAS.png"},
+  {cat:"Porcoes",name:"FRITAS C/ CHEDDAR E BACON",price:42,desc:"Batata frita com cheddar e bacon.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473521/251e3a54FRITAS_C_CHEDDAR.png"},
+  {cat:"Porcoes",name:"FRITAS C/ CHURRASCO MISTO",price:55,desc:"Batata frita com churrasco misto.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/473527/99bfce2cCHURRASCO_MISTO.png"},
+  {cat:"Acai",name:"ACAI NO COPO",price:14,desc:"Acai no copo com complementos a escolha.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3734959/814bed50A%C3%87A%C3%8D.png"},
+  {cat:"Sobremesas",name:"PAVE DE CHOCOLATE",price:15,desc:"Pave de chocolate cremoso.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3940631/enhanced-image-3940631-2026-04-07T23-46-01-305Z.jpg"},
+  {cat:"Sobremesas",name:"PAVE NINHO C/ MORANGO",price:15,desc:"Pave de ninho com morango.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3947506/enhanced-image-3947506-2026-04-09T15-33-27-324Z.jpg"},
+  {cat:"Milkshake",name:"MILKSHAKE",price:14,desc:"Diversos sabores.",img:"https://storage.googleapis.com/prod-cardapio-web/uploads/item/image/3735620/ec5c5936MILKSHAKE.png"},
+];
+
+const TEMPLATES=[
+  {id:'promo',icon:'flame',label:'Promo do Dia'},
+  {id:'combo',icon:'burger',label:'Combo'},
+  {id:'flash',icon:'zap',label:'Relâmpago'},
+  {id:'deporX',icon:'tag',label:'De/Por'},
+  {id:'weekend',icon:'party',label:'Fim de Semana'},
+  {id:'date',icon:'calHeart',label:'Data Especial'},
+  {id:'new',icon:'sparkles',label:'Novidade'},
+  {id:'depoimento',icon:'star',label:'Depoimento'},
+  {id:'copa',icon:'trophy',label:'Copa 2026'},
+  {id:'cardapio',icon:'clipboard',label:'Cardápio'},
+  {id:'doisPorUm',icon:'percent',label:'Leve 1, 2º Metade'},
+  {id:'frete',icon:'truck',label:'Entrega Grátis'},
+  {id:'horario',icon:'clock',label:'Horário'},
+  {id:'bastidores',icon:'camera',label:'Bastidores'},
+];
+
+const STYLES=[
+  {id:'bold',label:'BOLD'},
+  {id:'neon',label:'NEON'},
+  {id:'street',label:'STREET'},
+  {id:'premium',label:'PREMIUM'},
+  {id:'retro',label:'RETRO'},
+];
+
+const BADGES=[
+  {id:'none',label:'Nenhum',bg:'',fg:'',shape:''},
+  // Descontos
+  {id:'desc10',label:'-10%',bg:'#EF4444',fg:'#FFF',shape:'circle'},
+  {id:'desc20',label:'-20%',bg:'#EF4444',fg:'#FFF',shape:'circle'},
+  {id:'desc30',label:'-30%',bg:'#DC2626',fg:'#FFF',shape:'circle'},
+  {id:'desc50',label:'-50%',bg:'#DC2626',fg:'#FACC15',shape:'burst'},
+  // Urgência
+  {id:'hoje',label:'SÓ HOJE',bg:'#FACC15',fg:'#0D0D0D',shape:'pill'},
+  {id:'ultimas',label:'ÚLTIMAS!',bg:'#F97316',fg:'#FFF',shape:'pill'},
+  {id:'esgotando',label:'ESGOTANDO',bg:'#EF4444',fg:'#FFF',shape:'pill'},
+  // Novidade
+  {id:'novo',label:'NOVO',bg:'#22C55E',fg:'#FFF',shape:'pill'},
+  {id:'lancamento',label:'LANÇAMENTO',bg:'#10B981',fg:'#FFF',shape:'ribbon'},
+  // Social proof
+  {id:'mais_vendido',label:'MAIS VENDIDO',bg:'#E8922D',fg:'#0D0D0D',shape:'ribbon'},
+  {id:'favorito',label:'FAVORITO',bg:'#EC4899',fg:'#FFF',shape:'pill'},
+  {id:'campeao',label:'CAMPEÃO',bg:'#D4A531',fg:'#0D0D0D',shape:'shield'},
+  // Promos
+  {id:'gratis',label:'GRÁTIS',bg:'#22C55E',fg:'#FFF',shape:'burst'},
+  {id:'imperdivel',label:'IMPERDÍVEL',bg:'#8B5CF6',fg:'#FFF',shape:'pill'},
+  {id:'exclusivo',label:'EXCLUSIVO',bg:'#6366F1',fg:'#FFF',shape:'pill'},
+  {id:'limitado',label:'LIMITADO',bg:'#F97316',fg:'#0D0D0D',shape:'pill'},
+  // Temáticos
+  {id:'copa',label:'COPA 2026',bg:'#006341',fg:'#FFC72C',shape:'pill'},
+  {id:'frete',label:'FRETE GRÁTIS',bg:'#22C55E',fg:'#FFF',shape:'ribbon'},
+  {id:'primeiro',label:'1° PEDIDO',bg:'#3B82F6',fg:'#FFF',shape:'circle'},
+];
+
+const COLORS=[
+  {id:'red',bg:'#C41E2A',type:'solid'},
+  {id:'black',bg:'#0D0D0D',type:'solid'},
+  {id:'orange',bg:'#E8922D',type:'solid'},
+  {id:'green',bg:'#1a5c2a',type:'solid'},
+  {id:'navy',bg:'#1e3a5f',type:'solid'},
+  {id:'purple',bg:'#4a1942',type:'solid'},
+  {id:'grad1',bg:'linear-gradient(135deg,#C41E2A,#0D0D0D)',type:'gradient'},
+  {id:'grad2',bg:'linear-gradient(135deg,#E8922D,#C41E2A)',type:'gradient'},
+  {id:'grad3',bg:'linear-gradient(135deg,#0D0D0D,#1e3a5f)',type:'gradient'},
+  {id:'grad4',bg:'linear-gradient(135deg,#1a5c2a,#0D0D0D)',type:'gradient'},
+  {id:'grad5',bg:'linear-gradient(135deg,#4a1942,#C41E2A)',type:'gradient'},
+  {id:'grad6',bg:'linear-gradient(135deg,#006341,#FFC72C)',type:'gradient'},
+];
+
+const SPECIAL_DATES={"2026-06-12":{name:"Dia dos Namorados",type:"date",tip:"Combo Casal com desconto + sobremesa grátis"},"2026-06-13":{name:"Dia de Sto Antônio",type:"date",tip:"Post casamenteiro + combo casal"},"2026-06-19":{name:"Corpus Christi",type:"date",tip:"Feriado prolongado = combo família"},"2026-06-24":{name:"São João",type:"date",tip:"Post temático junino"},"2026-06-29":{name:"São Pedro",type:"date",tip:"Festa junina"},"2026-07-20":{name:"Dia do Amigo",type:"date",tip:"Promo traga o amigo"},"2026-08-09":{name:"Dia dos Pais",type:"date",tip:"Combo pai e filho"},"2026-08-11":{name:"Dia do Estudante",type:"date",tip:"Desconto estudantes"},"2026-09-07":{name:"Independência",type:"date",tip:"Post patriótico"},"2026-10-12":{name:"Dia das Crianças",type:"date",tip:"Combo infantil + brinde"},"2026-10-15":{name:"Dia do Professor",type:"date",tip:"Desconto professores"},"2026-10-31":{name:"Halloween",type:"date",tip:"Post temático"},"2026-11-15":{name:"Proclamação da República",type:"date",tip:"Feriado combo família"},"2026-11-27":{name:"Black Friday",type:"date",tip:"MAIOR PROMO DO ANO"},"2026-12-25":{name:"Natal",type:"date",tip:"Post natalino + combo"},"2026-12-31":{name:"Réveillon",type:"date",tip:"Agradecimento clientes"},"2026-06-11":{name:"Copa - Início!",type:"date",tip:"MEGA PROMO Copa 2026"},"2026-07-19":{name:"Copa - Final",type:"date",tip:"Promo final Copa"}};
+
+const WEEK_THEMES=[
+  {id:'aquisicao',name:'Aquisição',desc:'Atrair novos clientes para conhecer o Point',color:'#3B82F6'},
+  {id:'engajamento',name:'Engajamento',desc:'Criar comunidade e gerar interação',color:'#8B5CF6'},
+  {id:'conversao',name:'Conversão',desc:'Transformar seguidores em pedidos',color:'#22C55E'},
+  {id:'fidelizacao',name:'Fidelização',desc:'Recompensar e reter quem já comprou',color:'#EC4899'},
+];
+const CONTENT_PLAN={
+aquisicao:[
+  {day:'Segunda',promo:'Segunda da Fome',promoDesc:'Big Burgão + refri por R$12',produto:'BIG BURGÃO',formato:'story',conteudo:'Story mostrando o lanche sendo montado do zero',estrategia:'Preço agressivo gera primeiro pedido de novos clientes',hashtags:'#Realengo #LancheBarato #SegundaDaFome'},
+  {day:'Terça',promo:'Terça Dupla',promoDesc:'Duplo Cheddar por R$12',produto:'DUPLO CHEDDAR',formato:'feed',conteudo:'Carrossel comparando tamanho do lanche com a mão',estrategia:'Mostrar custo-benefício para quem ainda não conhece',hashtags:'#DuploCheddar #Realengo #MelhorLanche'},
+  {day:'Quarta',promo:'Quarta X-TUDO',promoDesc:'X-Tudo + fritas por R$18',produto:'X-TUDO',formato:'reels',conteudo:'Reels POV: "quando você descobre o X-Tudo do Point"',estrategia:'Conteúdo viral para alcance orgânico máximo',hashtags:'#XTUDO #FoodPorn #Realengo'},
+  {day:'Quinta',promo:'Quinta da Montanha',promoDesc:'X-Montanha por R$16',produto:'X-MONTANHA',formato:'feed',conteudo:'Post "Você conhece esse lanche?" com foto premium',estrategia:'Curiosidade + foto irresistível = descoberta',hashtags:'#XMontanha #DescubraOPoint'},
+  {day:'Sexta',promo:'Sexta em Família',promoDesc:'Combo Família 3 por R$69,90',produto:'COMBO FAMÍLIA 3',formato:'story',conteudo:'Story contagem regressiva: "Hoje tem combo!"',estrategia:'Urgência + sexta = pico de conversão',hashtags:'#ComboFamilia #SextaFeira #Delivery'},
+  {day:'Sábado',promo:'Sabadão do Point',promoDesc:'Mega X-Montanha + fritas + refri R$35',produto:'MEGA X-MONTANHA',formato:'feed',conteudo:'Foto profissional do carro-chefe com fundo escuro',estrategia:'Branding premium para impressionar novos visitantes',hashtags:'#SabadaoDoPoint #Hamburgueria'},
+  {day:'Domingo',promo:'Domingão Doce',promoDesc:'Lanche + Pavê por R$5 extra',produto:'PAVÊ DE CHOCOLATE',formato:'story',conteudo:'Story quiz: "Qual sobremesa combina com seu lanche?"',estrategia:'Cross-sell divertido apresenta variedade do cardápio',hashtags:'#Sobremesa #DomingoDoce'},
+],
+engajamento:[
+  {day:'Segunda',promo:'Segunda da Fome',promoDesc:'Big Burgão + refri por R$12',produto:'BIG BURGÃO',formato:'story',conteudo:'Enquete: "Qual seu pedido pra começar a semana?"',estrategia:'Interação direta faz o algoritmo entregar mais',hashtags:'#Enquete #SegundaDaFome'},
+  {day:'Terça',promo:'Terça Dupla',promoDesc:'Duplo Cheddar por R$12',produto:'DUPLO CHEDDAR',formato:'feed',conteudo:'Post "Marque quem come DOIS lanches sozinho"',estrategia:'Marcações expandem alcance orgânico de graça',hashtags:'#TercaDupla #MarcaOAmigo'},
+  {day:'Quarta',promo:'Quarta X-TUDO',promoDesc:'X-Tudo + fritas por R$18',produto:'X-TUDO',formato:'story',conteudo:'Bastidores: como o X-Tudo é montado na chapa',estrategia:'Transparência cria confiança e conexão emocional',hashtags:'#Bastidores #Cozinha #XTUDO'},
+  {day:'Quinta',promo:'Quinta da Montanha',promoDesc:'X-Montanha por R$16',produto:'X-MONTANHA',formato:'story',conteudo:'Caixinha de perguntas: "O que vocês querem no cardápio?"',estrategia:'Cliente ouvido = fidelização natural',hashtags:'#OQueVocesPensam #Point'},
+  {day:'Sexta',promo:'Sexta em Família',promoDesc:'Combo Família 3 por R$69,90',produto:'COMBO FAMÍLIA 3',formato:'feed',conteudo:'"Sexta pede lanche!" — post com CTA forte',estrategia:'Gatilho emocional de sexta + desejo = conversão',hashtags:'#SextaPedeLanche #ComboFamilia'},
+  {day:'Sábado',promo:'Sabadão do Point',promoDesc:'Mega X-Montanha + fritas + refri R$35',produto:'MEGA X-MONTANHA',formato:'reels',conteudo:'Reels: movimento na loja no sábado à noite',estrategia:'Prova social visual — lotação = qualidade percebida',hashtags:'#SabadaoDoPoint #Movimentacao'},
+  {day:'Domingo',promo:'Domingão Doce',promoDesc:'Lanche + Pavê por R$5 extra',produto:'PAVÊ DE CHOCOLATE',formato:'feed',conteudo:'Post de agradecimento pela semana + depoimento real',estrategia:'Encerrar semana com gratidão gera afinidade',hashtags:'#Obrigado #FamiliaPoint'},
+],
+conversao:[
+  {day:'Segunda',promo:'Segunda da Fome',promoDesc:'Big Burgão + refri por R$12',produto:'BIG BURGÃO',formato:'story',conteudo:'Story com timer "ACABA EM 3H" + link direto',estrategia:'Urgência real + facilidade de pedir = conversão',hashtags:'#PromoRelampago #UltimasHoras'},
+  {day:'Terça',promo:'Terça Dupla',promoDesc:'Duplo Cheddar por R$12',produto:'DUPLO CHEDDAR',formato:'feed',conteudo:'Post De/Por com preço riscado bem grande',estrategia:'Ancoragem de preço — mostrar economia real e tangível',hashtags:'#Economia #TercaDupla'},
+  {day:'Quarta',promo:'Quarta X-TUDO',promoDesc:'X-Tudo + fritas por R$18',produto:'X-TUDO',formato:'story',conteudo:'"Leve 1, o 2º sai pela metade" — story com destaque',estrategia:'Promoção de volume — aumenta ticket médio',hashtags:'#MetadeDoPreco #DoisPorUm'},
+  {day:'Quinta',promo:'Quinta da Montanha',promoDesc:'X-Montanha por R$16',produto:'X-MONTANHA',formato:'story',conteudo:'Flash promo 2h: "Das 20h às 22h — R$14!"',estrategia:'Janela curta de promo cria FOMO real e urgência',hashtags:'#FlashPromo #SoHoje'},
+  {day:'Sexta',promo:'Sexta em Família',promoDesc:'Combo Família 3 por R$69,90',produto:'COMBO FAMÍLIA 3',formato:'feed',conteudo:'Carrossel com 3 combos família (P, M, G)',estrategia:'Opções escalonadas — cada um escolhe seu bolso',hashtags:'#ComboFamilia #SextaEmFamilia'},
+  {day:'Sábado',promo:'Sabadão do Point',promoDesc:'Mega X-Montanha + fritas + refri R$35',produto:'MEGA X-MONTANHA',formato:'feed',conteudo:'"ENTREGA GRÁTIS acima de R$60" — post destaque',estrategia:'Frete grátis elimina a barreira final de compra',hashtags:'#EntregaGratis #SabadaoDoPoint'},
+  {day:'Domingo',promo:'Domingão Doce',promoDesc:'Lanche + Pavê por R$5 extra',produto:'PAVÊ DE CHOCOLATE',formato:'story',conteudo:'"Domingo pede sobremesa — só + R$5!"',estrategia:'Upsell irresistível — preço baixo demais pra recusar',hashtags:'#Sobremesa #DomingoDoce'},
+],
+fidelizacao:[
+  {day:'Segunda',promo:'Segunda da Fome',promoDesc:'Big Burgão + refri por R$12',produto:'BIG BURGÃO',formato:'feed',conteudo:'"Quem já pediu semana passada, comenta aqui!"',estrategia:'Reconhecer clientes recorrentes publicamente',hashtags:'#ClienteFiel #SegundaDaFome'},
+  {day:'Terça',promo:'Terça Dupla',promoDesc:'Duplo Cheddar por R$12',produto:'DUPLO CHEDDAR',formato:'story',conteudo:'Repost de cliente comendo o Duplo Cheddar',estrategia:'UGC (conteúdo do cliente) = prova social autêntica',hashtags:'#TercaDupla #ClienteReal'},
+  {day:'Quarta',promo:'Quarta X-TUDO',promoDesc:'X-Tudo + fritas por R$18',produto:'X-TUDO',formato:'story',conteudo:'"Nosso segredo? Ingredientes frescos TODO DIA"',estrategia:'Transparência reforça confiança do cliente fiel',hashtags:'#QualidadeReal #Bastidores'},
+  {day:'Quinta',promo:'Quinta da Montanha',promoDesc:'X-Montanha por R$16',produto:'X-MONTANHA',formato:'feed',conteudo:'"TOP 5 mais pedidos esta semana" — ranking',estrategia:'Ranking cria curiosidade e valida escolhas populares',hashtags:'#Top5 #MaisPedidos'},
+  {day:'Sexta',promo:'Sexta em Família',promoDesc:'Combo Família 3 por R$69,90',produto:'COMBO FAMÍLIA 3',formato:'story',conteudo:'"Promo EXCLUSIVA pra quem segue: combo + brinde"',estrategia:'Recompensa exclusiva para seguidores = retenção',hashtags:'#ExclusivoSeguidores #Brinde'},
+  {day:'Sábado',promo:'Sabadão do Point',promoDesc:'Mega X-Montanha + fritas + refri R$35',produto:'MEGA X-MONTANHA',formato:'reels',conteudo:'Reels: compilação de avaliações 5 estrelas',estrategia:'Prova social massiva com números reais',hashtags:'#49NoiFood #Avaliacoes'},
+  {day:'Domingo',promo:'Domingão Doce',promoDesc:'Lanche + Pavê por R$5 extra',produto:'PAVÊ DE CHOCOLATE',formato:'feed',conteudo:'"Obrigado por mais uma semana!" + números da semana',estrategia:'Gratidão + métricas = cliente se sente parte',hashtags:'#Obrigado #FamiliaPoint'},
+],
+};
+
+const COPIES={"Promoção":[{text:"🔥 PROMO RELÂMPAGO! Hoje o {produto} sai por apenas R${preco}! Corre que é só até acabar! 🍔\n\n📲 Peça pelo link na bio\n📍 R. Lomas Valentinas, 104 - Realengo",tag:"urgência"},{text:"É HOJE TEM PROMO! 😍\n\n{produto} por apenas R${preco}\nSó aqui no Point da Lomas!\n\n⏰ Válido somente hoje\n📲 Peça já pelo nosso cardápio digital",tag:"diária"},{text:"PARA TUDO! 🚨\n\nO melhor {produto} de Realengo tá com preço especial!\nDe R${preco_de} por apenas R${preco} 🤑\n\nVai perder essa? 👀\n\n📲 Link na bio",tag:"desconto"},{text:"ATENÇÃO REALENGO! 📢\n\nHoje tem {produto} com preço de CHORAR! 😭🍔\nApenas R${preco}!\n\nQuem já sabe, já pediu! ✅\n📲 Peça pelo iFood ou pelo link na bio",tag:"regional"},{text:"Se você ainda não provou, tá perdendo! 😤\n\n{produto} - R${preco}\nFartura que só o Point tem! 💛\n\n📲 Cardápio no link da bio\n📍 Realengo, RJ",tag:"fomo"}],"Combo":[{text:"COMBO CASAL 💛\n\n2 lanches + batata + refri 1L\nTudo isso por apenas R$47!\n\nChama o crush e vem pro Point! 😏🍔\n\n📲 Link na bio",tag:"casal"},{text:"SEXTA EM FAMÍLIA! 👨‍👩‍👧‍👦\n\nCombo Família com tudo que vocês merecem!\nA partir de R$68\n\nReúna a galera e faça o pedido! 🍟🥤\n\n📲 Peça pelo nosso cardápio",tag:"família"},{text:"O COMBO QUE ALIMENTA A GALERA TODA! 💪\n\nCombo Família 5 - R$100\n5 lanches + batata + refri\n\nIsso sim é economia! 🤑\n\n📲 Link na bio | 📍 Realengo",tag:"grupo"}],"Final de Semana":[{text:"SABADÃO DO POINT! 🎉🍔\n\nHoje o lanche é OBRIGATÓRIO!\nVem de {produto}! 😋\n\nAbertos até 1h da manhã!\n📲 Peça pelo link na bio",tag:"sábado"},{text:"DOMINGO PEDE LANCHE! 🙌\n\nE sobremesa também! 🍫\nPeça qualquer lanche + Pavê por R$5 a mais!\n\n📲 Link na bio",tag:"domingo"},{text:"FINAL DE SEMANA CHEGOU! 🎊\n\nE no Point da Lomas tem:\n🍔 Lanches artesanais\n🍟 Porções generosas\n🥤 Combos imbatíveis\n\n📲 Link na bio",tag:"fds"}],"Data Especial":[{text:"FELIZ DIA DOS NAMORADOS! 💕\n\nCombo Casal especial!\n2 lanches + batata + refri + PAVÊ GRÁTIS!\nTudo por R$55 🥰\n\n📲 Link na bio",tag:"namorados"},{text:"BLACK FRIDAY DO POINT! 🖤🔥\n\nO MAIOR DESCONTO DO ANO!\n{produto} pela METADE DO PREÇO!\n\nSó HOJE! 😱\n\n📲 Link na bio",tag:"blackfriday"},{text:"COPA DO MUNDO 2026! ⚽🇧🇷\n\nHoje tem jogo e tem PROMO!\n{produto} + refri por R${preco}!\n\nVem torcer com a gente! 🏆\n📲 Link na bio",tag:"copa"}],"Depoimento":[{text:"4.9 NO IFOOD! ⭐⭐⭐⭐⭐\n\nIsso não é sorte, é QUALIDADE!\n+200 pedidos por dia! 💛\n\nExperimenta e me conta! 😋\n📲 Link na bio",tag:"avaliação"},{text:"POR QUE O POINT É REFERÊNCIA? 🏆\n\n✅ 4.9 no iFood\n✅ +200 pedidos/dia\n✅ Ingredientes frescos\n✅ Entrega rápida\n\nQuem prova, volta! 💛\n📲 Link na bio",tag:"autoridade"}],"Engajamento":[{text:"QUAL SEU LANCHE FAVORITO? 🤔🍔\n\nComenta aqui! 👇\n\n#PointDaLomas #Realengo #MelhorLanche",tag:"enquete"},{text:"MARQUE aquele amigo que tá DEVENDO um lanche! 😤🍔\n\nCOMBO CASAL por R$47! 💛\n\n#PointDaLomas #Realengo",tag:"marcação"},{text:"SEXTA SEM LANCHE NÃO É SEXTA! 🙋‍♂️🍔\n\nCurte se sim! ❤️\nComenta se já pediu! 💬\n\n📲 Link na bio!\n#PointDaLomas",tag:"interação"}],"Entrega Grátis":[{text:"🛵 ENTREGA GRÁTIS!\n\nPedidos acima de R$60 ganham entrega SEM CUSTO!\n\n{produto} - R${preco}\n\nAproveita essa! 😋\n📲 Peça pelo link na bio\n📍 Realengo, RJ",tag:"delivery"},{text:"DELIVERY SEM TAXA! 🛵✨\n\nFez pedido acima de R$60?\nA entrega é POR NOSSA CONTA! 💛\n\nMonta seu pedido e aproveita!\n📲 Peça pelo link na bio\n📍 Atendemos toda região de Realengo",tag:"grátis"},{text:"NOVIDADE NO POINT! 🚀\n\nPediu R$60 ou mais?\nEntrega GRÁTIS pra você! 🛵\n\nSem taxa, sem pegadinha!\nSó alegria! 😎\n\n📲 Link na bio\n#PointDaLomas #EntregaGratis",tag:"novidade"}],"Metade do Preço":[{text:"LEVE 1 E O 2º SAI PELA METADE! 🤝🔥\n\n{produto} com desconto REAL!\nPaga 1 inteiro + 1 pela metade do preço!\n\nChama o parceiro e aproveita! 😏\n📲 Link na bio",tag:"metade"},{text:"PROMOÇÃO IMPERDÍVEL! 🤑\n\nLeve 1 {produto} e o segundo sai por METADE DO PREÇO!\n\nDivide com quem você ama! 💛\n\nSó hoje no Point da Lomas!\n📲 Link na bio",tag:"dupla"},{text:"DOBROU A FOME? 😤🍔\n\nLeve 1 e o 2º sai pela METADE!\n\n{produto} - primeiro por R${preco}, segundo por R${metade}!\n\nCorre! Promoção por tempo limitado! ⏰\n📲 Link na bio",tag:"urgência"}]};
+COPIES["Stories"]=[
+{text:"TÁ COM FOME?\nO Point resolve.\n\n{produto} — R${preco}\n\nLink na bio!",tag:"direto"},
+{text:"PROMO DO DIA\n\n{produto}\nR${preco}\n\nSó hoje!\nLink na bio!",tag:"promo"},
+{text:"Nosso {produto}...\né de chorar de bom.\n\nR${preco} — peça agora!",tag:"emocional"},
+{text:"POV: você pedindo o {produto} do Point da Lomas pela terceira vez essa semana\n\nR${preco} | Link na bio",tag:"humor"},
+{text:"QUAL VOCÊ PREFERE?\n\nX-TUDO ou X-MONTANHA?\n\nComenta aqui!\n\n@pointdalomas",tag:"interação"}
+];
+COPIES["Ganchos"]=[
+{text:"ATENÇÃO REALENGO!\n\nO lanche de R${preco} que tem 4.9 no iFood.\n{produto} — experimenta e depois me conta.\n\nLink na bio",tag:"curiosidade"},
+{text:"Se você mora em Realengo e ainda não conhece o Point da Lomas...\n\nVocê tá perdendo o melhor hambúrguer da região.\n\n{produto} — R${preco}\nPeça agora",tag:"fomo"},
+{text:"3 motivos pra pedir no Point da Lomas hoje:\n\n1. 4.9 no iFood com +200 pedidos/dia\n2. Ingredientes frescos todo dia\n3. {produto} por apenas R${preco}\n\nLink na bio",tag:"lista"},
+{text:"Todo mundo pergunta qual o segredo do nosso {produto}...\n\nO segredo? Ingredientes de qualidade e muito amor.\n\nR${preco} — peça agora!\nLink na bio",tag:"storytelling"},
+{text:"Sabe aquele lanche que você come e fica pensando nele o resto do dia?\n\n{produto} — R${preco}\n\nÉ esse.\n\nLink na bio | @pointdalomas",tag:"desejo"}
+];
+COPIES["Fidelização"]=[
+{text:"VOCÊ É ESPECIAL PRA GENTE!\n\nCliente Point da Lomas merece tratamento VIP.\n\nNa próxima compra, fala que viu esse post e ganha uma surpresa!\n\nPeça pelo link na bio\n#ClienteVIP #PointDaLomas",tag:"vip"},
+{text:"OBRIGADO por mais um dia incrível!\n\n+200 pedidos hoje — e cada um é especial pra gente.\n\nSe você é nosso cliente, você faz parte da família Point da Lomas!\n\nVolte sempre!\n@pointdalomas",tag:"agradecimento"},
+{text:"JÁ CONHECE NOSSO CARDÁPIO COMPLETO?\n\nTem muita gente que pede sempre o mesmo...\nMas nosso cardápio tem MUITO mais!\n\nAçaí, Milkshake, Pavê, Porções...\nQue tal experimentar algo novo?\n\nLink na bio",tag:"discovery"}
+];
+
+const AD_COPIES={
+"Atrair":[
+{headline:"O lanche mais pedido de Realengo",body:"Mais de 200 pedidos por dia no iFood.\n4.9 estrelas de avaliação.\nIngredientes frescos todo dia.\n\nDescubra por que todo mundo em Realengo já conhece o Point da Lomas.\n\nAbertos das 18h à 1h — todo dia.",cta:"Saiba Mais",tag:"awareness",tip:"Use foto do carro-chefe (X-Montanha ou X-Tudo). Segmente raio de 3-5km a partir de Realengo."},
+{headline:"Já experimentou o Point da Lomas?",body:"Lanchonete artesanal em Realengo com nota 4.9 no iFood.\n\nDo Big Burgão de R$9 ao Mega X-Montanha de R$28 — tem pra todo bolso e toda fome.\n\nPeça pelo iFood ou pelo nosso cardápio digital!",cta:"Ver Cardápio",tag:"discovery",tip:"Carrossel com 4-6 produtos. Público: 18-45 anos, interesse em fast food e delivery."},
+{headline:"Novo no bairro? Começa pelo melhor",body:"O Point da Lomas é referência em Realengo.\n\n200+ pedidos por dia\n4.9 no iFood\nAberto todo dia até 1h da manhã\n\nExperimenta e volta pra contar!",cta:"Peça Agora",tag:"local",tip:"Segmente novos moradores da região + bairros vizinhos (Padre Miguel, Bangu, Campo Grande)."},
+{headline:"De R$9 a R$28 — tem pra toda fome",body:"No Point da Lomas você monta do simples ao insano.\n\nBig Burgão — R$9\nX-Tudo — R$14\nDuplo X-Tudo — R$20\nMega X-Montanha — R$28\n\nQual é o seu?\n\nAbertos todo dia, 18h à 1h.",cta:"Ver Cardápio",tag:"cardápio",tip:"Formato carrossel mostrando progressão de preços. Funciona pra público frio."}
+],
+"Converter":[
+{headline:"{produto} por R${preco} — só hoje!",body:"Promoção exclusiva pra quem nos segue!\n\n{produto}\n{desc}\n\nDe R${preco_de} por apenas R${preco}.\n\nPeça agora pelo link ou pelo WhatsApp!",cta:"Pedir Agora",tag:"oferta direta",tip:"Foto real do produto com fundo escuro. Segmente quem já interagiu com o perfil."},
+{headline:"Combo Casal por R$47 — entregamos!",body:"2 lanches + batata frita + refrigerante 1L.\n\nTudo isso por apenas R$47!\n\nEntrega rápida pra Realengo e região.\nAbertos até 1h da manhã.",cta:"Fazer Pedido",tag:"combo",tip:"Melhor performance quinta a sábado à noite. Concentre budget entre 18h-22h."},
+{headline:"Tá com fome? A gente resolve",body:"Lanches a partir de R$9!\n\nBig Burgão, X-Tudo, Duplo Cheddar... mais de 12 opções.\n\nEntrega rápida em Realengo.\n4.9 no iFood.\n\nPeça agora!",cta:"Ver Cardápio",tag:"cardápio",tip:"Anúncio always-on (sempre ativo). Budget diário baixo com resultado constante."},
+{headline:"Entrega GRÁTIS acima de R$60",body:"Monte seu pedido e ganhe entrega sem custo!\n\nLanches, combos, porções, açaí, sobremesas...\nTudo no nosso cardápio digital.\n\nPeça agora e receba rápido em Realengo!",cta:"Fazer Pedido",tag:"frete grátis",tip:"Aumenta ticket médio. Destaque o valor mínimo de R$60. Segmente compradores recentes."}
+],
+"Prova Social":[
+{headline:"4.9 no iFood — mais de 200 pedidos/dia",body:"Isso não é propaganda. É resultado.\n\nDia após dia, centenas de clientes confiam no Point da Lomas.\n\nIngredientes frescos. Porções generosas. Entrega rápida.\n\nExperimenta e descobre por que todo mundo volta.",cta:"Experimentar",tag:"autoridade",tip:"Print de avaliações do iFood como criativo. Segmente público amplo."},
+{headline:"Por que 200 pessoas pedem aqui todo dia?",body:"É a carne fresca.\nÉ o cheddar cremoso de verdade.\nÉ o pão quentinho.\nÉ a entrega rápida.\nÉ o preço justo.\n\nÉ tudo isso junto — e é por isso que somos 4.9 no iFood.\n\nExperimenta.",cta:"Saiba Mais",tag:"storytelling",tip:"Formato carrossel: cada card = um motivo. Funciona bem com público frio."},
+{headline:"O melhor lanche de Realengo",body:"Não é a gente que diz. São nossos clientes.\n\n4.9 no iFood\n200-300 pedidos todo dia\nAbertos 7 dias por semana\n\nQuem prova, volta.\nQuem volta, indica.\n\nFaz parte dessa família!",cta:"Pedir Agora",tag:"social proof",tip:"Use depoimentos reais como imagem. Vídeo de bastidores converte muito bem."}
+],
+"Urgência":[
+{headline:"PROMOÇÃO RELÂMPAGO — próximas 3h!",body:"{produto} de R${preco_de} por R${preco}!\n\nSó hoje, só até acabar!\n\nAbertos até 1h — corre que ainda dá tempo!",cta:"Aproveitar Agora",tag:"flash sale",tip:"SOMENTE em promos reais. Público: visitou o perfil nos últimos 7 dias."},
+{headline:"ÚLTIMA CHANCE — promo acaba hoje",body:"Se você viu e não pediu... a hora é AGORA.\n\n{produto} com desconto especial!\nApenas R${preco}.\n\nDepois de hoje, volta ao preço normal.",cta:"Garantir Desconto",tag:"escassez",tip:"Melhor com remarketing (visitou perfil mas não pediu). Budget concentrado em 6h."},
+{headline:"50% OFF no segundo lanche!",body:"Leve 1 e o 2º sai pela METADE!\n\n{produto}: primeiro por R${preco}, segundo por R${metade}!\n\nDivide com alguém e economiza!\n\nSó enquanto durar.",cta:"Pedir com Desconto",tag:"bogo",tip:"Melhor dia: terça a quinta. Aumenta ticket médio significativamente."},
+{headline:"HOJE TEM — {produto} por R${preco}",body:"Promoção válida SOMENTE HOJE.\n\n{produto}\n{desc}\n\nPreço normal: R${preco_de}\nHoje: R${preco}\n\nNão vai perder, né?",cta:"Pedir Agora",tag:"diária",tip:"Rode 1 produto diferente por dia. Cria hábito de acompanhar promoções."}
+],
+"Remarketing":[
+{headline:"Esqueceu de pedir?",body:"A gente viu que você deu uma olhada no nosso cardápio...\n\nE a gente entende — às vezes a fome demora pra bater.\n\nMas quando bater, o Point da Lomas tá aqui!\n\nAbertos até 1h. Entrega rápida em Realengo.",cta:"Fazer Pedido",tag:"abandono",tip:"Público: visitou site/perfil nos últimos 3-7 dias. Budget baixo, conversão alta."},
+{headline:"Ainda dá tempo de pedir!",body:"Você visitou nosso cardápio e ainda não fez o pedido.\n\nQue tal aproveitar agora?\n\n{produto} por apenas R${preco}.\nEntrega rápida pra Realengo!",cta:"Pedir Agora",tag:"lembrete",tip:"Usar produto mais popular como isca. Foto apetitosa é essencial."},
+{headline:"Seu lanche tá esperando",body:"Já conhece o Point da Lomas.\nJá sabe que é bom.\n\nHoje tem {produto} por R${preco}.\n\nPeça agora e receba rápido!",cta:"Peça Já",tag:"retorno",tip:"Segmente clientes que compraram há mais de 7 dias. Objetivo: reativação."},
+{headline:"Bora repetir a dose?",body:"Seu último pedido no Point da Lomas foi bom, né?\n\nA gente sabe.\n\n{produto} — R${preco}\nMesma qualidade, mesmo sabor, mesmo carinho.\n\nPeça de novo!",cta:"Pedir de Novo",tag:"recompra",tip:"Custom audience de compradores recentes (7-30 dias). Personalizar com produto pedido."}
+]
+};
+
+// ============================
+// STATE
+// ============================
+let S={page:'dashboard',tpl:'promo',style:'bold',format:'feed',product:0,bgIdx:0,badge:'none',calDate:new Date(),copyCat:Object.keys(COPIES)[0],productCat:'Todos',adObj:Object.keys(AD_COPIES)[0],adProduct:0,weekTheme:'aquisicao'};
+
+// ============================
+// RENDER HELPERS
+// ============================
+function $(id){return document.getElementById(id)}
+function navigateTo(p){S.page=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$('page-'+p).classList.add('active');document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.querySelector(`.nav-item[data-page="${p}"]`).classList.add('active')}
+document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>navigateTo(n.dataset.page)));
+
+function showToast(m){const t=$('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2000)}
+
+function getIcon(n,sz){
+  sz=sz||20;const a=`width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
+  return({
+    flame:`<svg ${a}><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 002.5 2.5z"/></svg>`,
+    burger:`<svg ${a}><path d="M5 15h14a2 2 0 012 1v0a2 2 0 01-2 2H5a2 2 0 01-2-2v0a2 2 0 012-1z"/><path d="M5 15V9c0-3.87 3.13-7 7-7s7 3.13 7 7v6"/><line x1="3" y1="11" x2="21" y2="11"/></svg>`,
+    zap:`<svg ${a}><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+    tag:`<svg ${a}><path d="M12 2H2v10l9.29 9.29a1 1 0 001.42 0l8.58-8.58a1 1 0 000-1.42L12 2z"/><circle cx="7" cy="7" r="1"/></svg>`,
+    party:`<svg ${a}><path d="M5.8 11.3L2 22l10.7-3.8"/><path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01"/><path d="M22 2l-2.24 3.36"/><path d="M13.76 4.86l-1.56 4.68"/><path d="M16.04 5.6l-3.84 1.28"/></svg>`,
+    calHeart:`<svg ${a}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M12 20c-1.5-1.5-4-3.5-4-5.5a2.5 2.5 0 015 0 2.5 2.5 0 015 0c0 2-2.5 4-4 5.5z"/></svg>`,
+    sparkles:`<svg ${a}><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 14l.75 2.25L22 17l-2.25.75L19 20l-.75-2.25L16 17l2.25-.75z"/></svg>`,
+    star:`<svg ${a}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    trophy:`<svg ${a}><path d="M6 9H4.5a2.5 2.5 0 010-5H6M18 9h1.5a2.5 2.5 0 000-5H18"/><path d="M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0012 0V2z"/></svg>`,
+    clipboard:`<svg ${a}><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="12" y2="16"/></svg>`,
+    percent:`<svg ${a}><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>`,
+    truck:`<svg ${a}><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+    clock:`<svg ${a}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+    camera:`<svg ${a}><path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`,
+    palette:`<svg ${a}><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.5-.67 1.5-1.5 0-.4-.15-.77-.4-1.05-.25-.28-.4-.65-.4-1.05 0-.83.67-1.5 1.5-1.5H16c3.31 0 6-2.69 6-6 0-5.52-4.48-9.5-10-9.5z"/></svg>`,
+    barChart:`<svg ${a}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>`,
+    fileText:`<svg ${a}><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    calendar:`<svg ${a}><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+    target:`<svg ${a}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+  })[n]||'';
+}
+
+// ============================
+// GENERATOR INIT
+// ============================
+function initGenerator(){
+  // Templates
+  $('template-grid').innerHTML=TEMPLATES.map(t=>`<button class="template-btn ${t.id===S.tpl?'active':''}" data-tpl="${t.id}"><span class="icon">${getIcon(t.icon,18)}</span>${t.label}</button>`).join('');
+  document.querySelectorAll('.template-btn').forEach(b=>b.addEventListener('click',()=>{S.tpl=b.dataset.tpl;initGenerator();applyDefaults();updatePreview()}));
+
+  // Styles
+  $('style-grid').innerHTML=STYLES.map(s=>`<button class="style-btn ${s.id===S.style?'active':''}" data-style="${s.id}">${s.label}</button>`).join('');
+  document.querySelectorAll('.style-btn').forEach(b=>b.addEventListener('click',()=>{S.style=b.dataset.style;initGenerator();updatePreview()}));
+
+  // Format
+  document.querySelectorAll('.format-btn').forEach(b=>{b.classList.toggle('active',b.dataset.format===S.format);b.onclick=()=>{S.format=b.dataset.format;document.querySelectorAll('.format-btn').forEach(x=>x.classList.toggle('active',x.dataset.format===S.format));$('post-canvas').className='post-canvas '+S.format;updatePreview()}});
+
+  // Badges
+  $('badge-grid').innerHTML=BADGES.map(b=>`<button class="badge-btn ${b.id===S.badge?'active':''}" data-badge="${b.id}">${b.bg?`<span class="badge-dot" style="background:${b.bg}"></span>`:''}${b.label}</button>`).join('');
+  document.querySelectorAll('.badge-btn').forEach(b=>b.addEventListener('click',()=>{S.badge=b.dataset.badge;$('badge-grid').querySelectorAll('.badge-btn').forEach(x=>x.classList.toggle('active',x.dataset.badge===S.badge));updatePreview()}));
+
+  // Colors
+  $('color-row').innerHTML=COLORS.map((c,i)=>{
+    const bg=c.type==='gradient'?c.bg:c.bg;
+    return `<div class="color-swatch ${i===S.bgIdx?'active':''}" style="background:${bg}" data-idx="${i}" onclick="S.bgIdx=${i};document.querySelectorAll('.color-swatch').forEach(x=>x.classList.remove('active'));this.classList.add('active');updatePreview()"></div>`;
+  }).join('');
+
+  // Product category filter + Products
+  const cats=['Todos',...new Set(PRODUCTS.map(p=>p.cat))];
+  const filtered=S.productCat&&S.productCat!=='Todos'?PRODUCTS.map((p,i)=>({...p,idx:i})).filter(p=>p.cat===S.productCat):PRODUCTS.map((p,i)=>({...p,idx:i}));
+  if(filtered.length&&!filtered.some(p=>p.idx===S.product))S.product=filtered[0].idx;
+  $('product-list').innerHTML=`<div class="cat-filter">${cats.map(c=>`<button class="cat-filter-btn ${(S.productCat||'Todos')===c?'active':''}" onclick="S.productCat='${c}';initGenerator();updatePreview()">${c}</button>`).join('')}</div>`+filtered.map(p=>`<div class="product-item ${p.idx===S.product?'selected':''}" onclick="S.product=${p.idx};initGenerator();applyDefaults();updatePreview()"><img src="${p.img}" alt="${p.name}" crossorigin="anonymous" loading="lazy"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price>0?'R$'+p.price:'Sob consulta'}</div></div></div>`).join('');
+
+  // Favorites
+  renderFavorites();
+}
+
+function applyDefaults(){
+  const p=PRODUCTS[S.product];
+  const d={
+    promo:{t:'PROMO DO DIA',s:'R$'+p.price,o:'',e:'Só hoje! Peça já!'},
+    combo:{t:'COMBO ESPECIAL',s:'R$'+p.price,o:'',e:'Pra toda família!'},
+    flash:{t:'PROMO RELÂMPAGO',s:'R$'+p.price,o:'R$'+(p.price+6),e:'Corre! Últimas unidades!'},
+    deporX:{t:p.name,s:'R$'+p.price,o:'R$'+(p.price+8),e:'Economia garantida!'},
+    weekend:{t:'SABADÃO DO POINT',s:'R$'+p.price,o:'',e:'Abertos até 1h!'},
+    date:{t:'DIA ESPECIAL',s:'Promo exclusiva!',o:'',e:'Aproveite!'},
+    new:{t:'NOVIDADE!',s:p.name,o:'',e:'R$'+p.price},
+    depoimento:{t:'4.9 NO IFOOD',s:'+200 pedidos por dia',o:'',e:'Melhor lanche de Realengo, sem comparação!'},
+    copa:{t:'COPA 2026',s:p.name+' + REFRI',o:'',e:'R$'+p.price+' | Vem torcer!'},
+    cardapio:{t:'CARDÁPIO DO DIA',s:p.name,o:'',e:'Confira todas as opções!'},
+    doisPorUm:{t:'LEVE 1 E O 2º SAI PELA METADE',s:p.name,o:'',e:'Promoção válida hoje!'},
+    frete:{t:'ENTREGA GRÁTIS',s:p.name+' - R$'+p.price,o:'',e:'Pedidos acima de R$60!'},
+    horario:{t:'ABERTOS AGORA',s:'18h às 01h',o:'',e:'Todos os dias! Vem pro Point!'},
+    bastidores:{t:'DIRETO DA COZINHA',s:'Qualidade que você vê!',o:'',e:'Feito com carinho pra você!'},
+  }[S.tpl]||{t:'PROMO',s:'R$'+p.price,o:'',e:''};
+  $('post-title').value=d.t;$('post-subtitle').value=d.s;$('post-oldprice').value=d.o;$('post-extra').value=d.e;
+}
+
+// ============================
+// VISUAL ENGINE
+// ============================
+function getBackground(){
+  const c=COLORS[S.bgIdx];
+  return c.type==='gradient'?c.bg:c.bg;
+}
+
+function getDecorations(w,h){
+  const st=S.style;
+  let d='';
+  // Bold — diagonal cuts
+  if(st==='bold'){
+    d+=`<div style="position:absolute;top:-10%;right:-10%;width:60%;height:60%;background:rgba(255,255,255,.04);transform:rotate(25deg);border-radius:20px;"></div>`;
+    d+=`<div style="position:absolute;bottom:-20%;left:-10%;width:50%;height:50%;background:rgba(0,0,0,.15);transform:rotate(-15deg);border-radius:20px;"></div>`;
+  }
+  // Neon — strong glows + scanlines + bright inner border
+  if(st==='neon'){
+    d+=`<div style="position:absolute;top:5%;left:-10%;width:55%;height:55%;background:radial-gradient(circle,rgba(232,146,45,.35) 0%,transparent 60%);border-radius:50%;"></div>`;
+    d+=`<div style="position:absolute;bottom:0;right:-5%;width:45%;height:45%;background:radial-gradient(circle,rgba(196,30,42,.3) 0%,transparent 60%);border-radius:50%;"></div>`;
+    d+=`<div style="position:absolute;inset:10px;border:1.5px solid rgba(232,146,45,.35);"></div>`;
+    d+=`<div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);pointer-events:none;"></div>`;
+  }
+  // Premium — gradient overlay + gold border + corner accents
+  if(st==='premium'){
+    d+=`<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.4) 100%);"></div>`;
+    d+=`<div style="position:absolute;top:14px;left:14px;right:14px;bottom:14px;border:1px solid rgba(212,165,49,.35);"></div>`;
+    d+=`<div style="position:absolute;top:14px;left:14px;width:28px;height:28px;border-top:2px solid rgba(212,165,49,.6);border-left:2px solid rgba(212,165,49,.6);"></div>`;
+    d+=`<div style="position:absolute;top:14px;right:14px;width:28px;height:28px;border-top:2px solid rgba(212,165,49,.6);border-right:2px solid rgba(212,165,49,.6);"></div>`;
+    d+=`<div style="position:absolute;bottom:14px;left:14px;width:28px;height:28px;border-bottom:2px solid rgba(212,165,49,.6);border-left:2px solid rgba(212,165,49,.6);"></div>`;
+    d+=`<div style="position:absolute;bottom:14px;right:14px;width:28px;height:28px;border-bottom:2px solid rgba(212,165,49,.6);border-right:2px solid rgba(212,165,49,.6);"></div>`;
+  }
+  // Retro — visible sunburst + halftone dots
+  if(st==='retro'){
+    let rays='';for(let i=0;i<12;i++){rays+=`<div style="position:absolute;top:50%;left:50%;width:200%;height:8%;background:rgba(255,255,255,.08);transform-origin:0 50%;transform:rotate(${i*30}deg);"></div>`;}
+    d+=`<div style="position:absolute;inset:0;overflow:hidden;">${rays}</div>`;
+    d+=`<div style="position:absolute;top:6%;right:4%;width:60px;height:60px;background:radial-gradient(circle,rgba(250,204,21,.25) 30%,transparent 31%);background-size:10px 10px;"></div>`;
+    d+=`<div style="position:absolute;bottom:8%;left:3%;width:50px;height:50px;background:radial-gradient(circle,rgba(250,204,21,.18) 30%,transparent 31%);background-size:10px 10px;"></div>`;
+  }
+  // Street — big paint splashes + diagonal stripe
+  if(st==='street'){
+    d+=`<div style="position:absolute;top:3%;right:0;width:110px;height:90px;background:rgba(232,146,45,.3);border-radius:50% 40% 60% 30%;transform:rotate(20deg);"></div>`;
+    d+=`<div style="position:absolute;bottom:6%;left:-2%;width:90px;height:75px;background:rgba(196,30,42,.28);border-radius:40% 50% 30% 60%;transform:rotate(-25deg);"></div>`;
+    d+=`<div style="position:absolute;top:35%;left:-4%;width:55px;height:55px;background:rgba(255,255,255,.07);border-radius:60% 30% 50% 40%;transform:rotate(45deg);"></div>`;
+    d+=`<div style="position:absolute;top:-5%;right:-5%;width:35%;height:120%;background:rgba(255,255,255,.03);transform:rotate(18deg);"></div>`;
+  }
+  return d;
+}
+
+function getBadgeHtml(position){
+  if(S.badge==='none')return '';
+  const b=BADGES.find(x=>x.id===S.badge);if(!b||!b.bg)return '';
+  const st=S.style;
+  const isSt=S.format==='story';
+  const base='position:absolute;z-index:10;font-family:Poppins,sans-serif;font-weight:900;white-space:nowrap;';
+  // Style-specific effects
+  let fx='';
+  if(st==='neon')fx=`box-shadow:0 0 12px ${b.bg}88,0 0 24px ${b.bg}44;`;
+  else if(st==='street')fx='text-shadow:2px 2px 0 rgba(0,0,0,.35);';
+  else if(st==='premium')fx='letter-spacing:2px;';
+  else if(st==='retro')fx='box-shadow:3px 3px 0 rgba(0,0,0,.4);';
+  else fx='box-shadow:0 4px 12px rgba(0,0,0,.35);';
+
+  const sz=isSt?1.15:1;
+  if(b.shape==='circle'){
+    const w=Math.round(56*sz),fs=Math.round(15*sz);
+    return `<div style="${base}top:${-Math.round(10*sz)}px;right:${-Math.round(10*sz)}px;width:${w}px;height:${w}px;border-radius:50%;background:${b.bg};color:${b.fg};font-size:${fs}px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1;${fx}">${b.label}</div>`;
+  }
+  if(b.shape==='burst'){
+    const w=Math.round(66*sz),fs=Math.round(16*sz);
+    return `<div style="${base}top:${-Math.round(14*sz)}px;right:${-Math.round(14*sz)}px;width:${w}px;height:${w}px;">
+      <div style="position:absolute;inset:0;background:${b.bg};border-radius:50%;"></div>
+      <div style="position:absolute;inset:4px;background:${b.bg};transform:rotate(45deg);border-radius:6px;"></div>
+      <div style="position:absolute;inset:4px;background:${b.bg};transform:rotate(22deg);border-radius:6px;"></div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:${b.fg};font-family:Poppins,sans-serif;font-weight:900;font-size:${fs}px;z-index:2;${fx}">${b.label}</div>
+    </div>`;
+  }
+  if(b.shape==='ribbon'){
+    const fs=Math.round(9*sz),py=Math.round(4*sz),px=Math.round(28*sz);
+    return `<div style="${base}top:${Math.round(10*sz)}px;right:${-Math.round(18*sz)}px;transform:rotate(35deg);background:${b.bg};color:${b.fg};font-size:${fs}px;padding:${py}px ${px}px;letter-spacing:1px;${fx}">${b.label}</div>`;
+  }
+  if(b.shape==='shield'){
+    const w=Math.round(60*sz),h=Math.round(68*sz),fs=Math.round(9*sz);
+    return `<div style="${base}top:${-Math.round(10*sz)}px;right:${-Math.round(8*sz)}px;width:${w}px;height:${h}px;background:${b.bg};border-radius:${Math.round(6*sz)}px ${Math.round(6*sz)}px ${Math.round(30*sz)}px ${Math.round(30*sz)}px;display:flex;align-items:center;justify-content:center;text-align:center;color:${b.fg};font-size:${fs}px;line-height:1.2;padding:0 4px;${fx}">${b.label}</div>`;
+  }
+  // pill (default)
+  const fs=Math.round(11*sz),py=Math.round(5*sz),px=Math.round(12*sz);
+  return `<div style="${base}top:${-Math.round(8*sz)}px;right:${-Math.round(8*sz)}px;background:${b.bg};color:${b.fg};font-size:${fs}px;padding:${py}px ${px}px;border-radius:20px;transform:rotate(3deg);${fx}">${b.label}</div>`;
+}
+
+function getFonts(){
+  return {
+    bold:{title:"font-family:'Poppins',sans-serif;font-weight:900;",sub:"font-family:'Poppins',sans-serif;font-weight:700;",extra:"font-family:'Poppins',sans-serif;font-weight:500;"},
+    neon:{title:"font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:4px;",sub:"font-family:'Poppins',sans-serif;font-weight:700;",extra:"font-family:'Poppins',sans-serif;font-weight:400;"},
+    street:{title:"font-family:'Permanent Marker',cursive;font-weight:400;",sub:"font-family:'Bangers',cursive;font-weight:400;letter-spacing:2px;",extra:"font-family:'Poppins',sans-serif;font-weight:600;"},
+    premium:{title:"font-family:'Poppins',sans-serif;font-weight:300;letter-spacing:3px;text-transform:uppercase;",sub:"font-family:'Poppins',sans-serif;font-weight:600;",extra:"font-family:'Poppins',sans-serif;font-weight:300;letter-spacing:1.5px;"},
+    retro:{title:"font-family:'Bangers',cursive;font-weight:400;letter-spacing:3px;",sub:"font-family:'Poppins',sans-serif;font-weight:800;",extra:"font-family:'Poppins',sans-serif;font-weight:600;"},
+  }[S.style]||{title:"font-family:'Poppins',sans-serif;font-weight:900;",sub:"font-family:'Poppins',sans-serif;font-weight:700;",extra:"font-family:'Poppins',sans-serif;font-weight:500;"};
+}
+
+function getTitleEffect(text,size){
+  const st=S.style;
+  if(st==='neon')return `<h2 style="${getFonts().title}font-size:${size};color:#FFF;text-shadow:0 0 7px rgba(232,146,45,1),0 0 20px rgba(232,146,45,.6),0 0 40px rgba(232,146,45,.35),0 0 80px rgba(232,146,45,.15);margin:0;">${text}</h2>`;
+  if(st==='street')return `<h2 style="${getFonts().title}font-size:${size};color:#FFF;text-shadow:3px 3px 0 #C41E2A,6px 6px 0 rgba(0,0,0,.25);margin:0;">${text}</h2>`;
+  if(st==='premium')return `<h2 style="${getFonts().title}font-size:${size};color:#D4A531;text-shadow:0 2px 6px rgba(0,0,0,.2);margin:0;">${text}</h2>`;
+  if(st==='retro')return `<h2 style="${getFonts().title}font-size:${size};color:#FACC15;text-shadow:4px 4px 0 rgba(0,0,0,.5);margin:0;">${text}</h2>`;
+  return `<h2 style="${getFonts().title}font-size:${size};color:#FFF;text-shadow:2px 4px 12px rgba(0,0,0,.5);margin:0;">${text}</h2>`;
+}
+
+function getPriceHtml(price,oldPrice,sz){
+  const f=getFonts();const st=S.style;
+  let pc='#E8922D',ps='text-shadow:0 2px 8px rgba(0,0,0,.3);';
+  if(st==='neon'){pc='#FFF';ps='text-shadow:0 0 8px rgba(232,146,45,.9),0 0 20px rgba(232,146,45,.4);';}
+  else if(st==='street'){pc='#FFF';ps='text-shadow:2px 2px 0 #C41E2A;';}
+  else if(st==='premium'){pc='#D4A531';ps='text-shadow:0 2px 4px rgba(0,0,0,.15);';}
+  else if(st==='retro'){pc='#FACC15';ps='text-shadow:3px 3px 0 rgba(0,0,0,.4);';}
+  if(oldPrice){
+    return `<div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+      <span style="${f.sub}font-size:${Math.round(parseInt(sz)*0.6)}px;color:rgba(255,255,255,.45);text-decoration:line-through;">${oldPrice}</span>
+      <span style="${f.sub}font-size:${sz};color:${pc};${ps}">${price}</span>
+    </div>`;
+  }
+  return `<p style="${f.sub}font-size:${sz};color:${pc};${ps}margin:0;">${price}</p>`;
+}
+
+function getCtaHtml(){
+  const st=S.style;const isSt=S.format==='story';
+  let s=`display:inline-block;padding:${isSt?'10px 24px':'8px 20px'};border-radius:20px;font-family:Poppins,sans-serif;font-size:${isSt?'13px':'11px'};font-weight:800;margin-bottom:6px;`;
+  if(st==='neon')s+='background:#E8922D;color:#0D0D0D;box-shadow:0 0 15px rgba(232,146,45,.5),0 0 30px rgba(232,146,45,.2);';
+  else if(st==='premium')s+=`background:transparent;color:#D4A531;border:1.5px solid #D4A531;letter-spacing:2px;font-size:${isSt?'12px':'10px'};`;
+  else if(st==='street')s+='background:#C41E2A;color:white;transform:rotate(-2deg);letter-spacing:1px;text-shadow:1px 1px 0 rgba(0,0,0,.2);';
+  else if(st==='retro')s+='background:#FACC15;color:#0D0D0D;box-shadow:4px 4px 0 rgba(0,0,0,.35);';
+  else s+='background:#E8922D;color:#0D0D0D;';
+  return `<div style="${s}">PEÇA JÁ →</div>`;
+}
+
+function getProductImageStyle(sz){
+  const st=S.style;
+  let base=`width:${sz};height:${sz};object-fit:cover;position:relative;border-radius:50%;mix-blend-mode:multiply;`;
+  if(st==='neon')base+=`filter:brightness(1.15) contrast(1.05);`;
+  else if(st==='street')base+=`filter:brightness(1.1) contrast(1.05);`;
+  else if(st==='premium')base+=`filter:brightness(1.1) saturate(1.1);`;
+  else base+=`filter:brightness(1.1) contrast(1.05);`;
+  return base;
+}
+function getProductWrapStyle(sz){
+  const st=S.style;
+  let base=`width:${sz};height:${sz};border-radius:50%;overflow:hidden;position:relative;`;
+  if(st==='neon')base+=`box-shadow:0 0 20px rgba(232,146,45,.45),0 0 40px rgba(232,146,45,.15),0 8px 32px rgba(0,0,0,.4);border:2px solid rgba(232,146,45,.4);`;
+  else if(st==='street')base+=`box-shadow:0 8px 32px rgba(0,0,0,.5);border:3px solid #C41E2A;`;
+  else if(st==='premium')base+=`box-shadow:0 12px 40px rgba(0,0,0,.3);border:1.5px solid rgba(212,165,49,.5);`;
+  else if(st==='retro')base+=`box-shadow:5px 5px 0 rgba(0,0,0,.4);border:4px solid #FACC15;`;
+  else base+=`box-shadow:0 8px 32px rgba(0,0,0,.4);`;
+  return base;
+}
+function productImgHtml(src,sz,extraStyle){
+  extraStyle=extraStyle||'';
+  return `<div style="${getProductWrapStyle(sz)}${extraStyle}"><div style="position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);z-index:1;pointer-events:none;border-radius:50%;"></div><img src="${src}" style="${getProductImageStyle(sz)}" crossorigin="anonymous"></div>`;
+}
+
+// ============================
+// UPDATE PREVIEW
+// ============================
+function updatePreview(){
+  const canvas=$('post-canvas');
+  const p=PRODUCTS[S.product];
+  const title=$('post-title').value;
+  const subtitle=$('post-subtitle').value;
+  const oldprice=$('post-oldprice').value;
+  const extra=$('post-extra').value;
+  const isSt=S.format==='story';
+  const bg=getBackground();
+  const bgStyle=COLORS[S.bgIdx].type==='gradient'?`background:${bg}`:`background:${bg}`;
+  const deco=getDecorations();
+  const badge=getBadgeHtml();
+  const fonts=getFonts();
+
+  const imgSz=isSt?'280px':'240px';
+  const titleSz=isSt?'38px':'32px';
+  const subSz=isSt?'22px':'20px';
+  const extraSz=isSt?'14px':'13px';
+  const pad=isSt?'28px':'20px';
+
+  // Special templates
+  if(S.tpl==='depoimento'){
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${pad};">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:relative;z-index:3;text-align:center;max-width:90%;">
+        <img src="${LOGO}" style="width:${isSt?'80px':'64px'};height:${isSt?'80px':'64px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:16px;" crossorigin="anonymous">
+        <div style="font-size:${isSt?'36px':'28px'};margin-bottom:8px;color:#D4A531;letter-spacing:6px;text-shadow:0 2px 8px rgba(212,165,49,.3);">★★★★★</div>
+        ${getTitleEffect(title,isSt?'34px':'28px')}
+        <p style="${fonts.sub}font-size:${isSt?'16px':'14px'};color:rgba(255,255,255,.85);margin:12px 0 20px;">${subtitle}</p>
+        <div style="background:rgba(0,0,0,.25);border-radius:12px;padding:16px 20px;margin-bottom:20px;${S.style==='neon'?'border:1px solid rgba(232,146,45,.3);':''}${S.style==='premium'?'border:1px solid rgba(212,165,49,.2);':''}">
+          <p style="font-family:Poppins,sans-serif;font-size:${isSt?'14px':'12px'};color:white;font-style:italic;line-height:1.6;">"${extra}"</p>
+        </div>
+        <p style="${fonts.extra}font-size:${isSt?'15px':'13px'};color:#E8922D;">Quem prova, volta!</p>
+      </div>
+      <div style="position:absolute;bottom:14px;left:0;right:0;text-align:center;z-index:3;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='cardapio'){
+    const items=PRODUCTS.filter(x=>x.cat==='Sanduiches').slice(0,6);
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'20px 16px 10px':'14px 16px 6px'};">
+        <img src="${LOGO}" style="width:${isSt?'44px':'36px'};height:${isSt?'44px':'36px'};border-radius:50%;border:2px solid #E8922D;" crossorigin="anonymous">
+        <div style="text-align:right;">${getTitleEffect(title,isSt?'22px':'18px')}</div>
+      </div>
+      <div style="position:relative;z-index:3;flex:1;display:grid;grid-template-columns:1fr 1fr ${isSt?'':'1fr'};gap:${isSt?'8px':'6px'};padding:${isSt?'8px 16px':'6px 14px'};align-content:center;">
+        ${items.map(it=>`<div style="background:rgba(0,0,0,.25);border-radius:10px;padding:${isSt?'10px':'8px'};text-align:center;${S.style==='neon'?'border:1px solid rgba(232,146,45,.2);':''}${S.style==='premium'?'border:1px solid rgba(212,165,49,.15);':''}">
+          <img src="${it.img}" style="width:${isSt?'64px':'52px'};height:${isSt?'64px':'52px'};object-fit:cover;border-radius:50%;mix-blend-mode:multiply;filter:brightness(1.1);" crossorigin="anonymous">
+          <p style="font-family:Poppins,sans-serif;font-size:${isSt?'10px':'8px'};font-weight:700;color:white;margin:4px 0 2px;">${it.name}</p>
+          <p style="font-family:Poppins,sans-serif;font-size:${isSt?'11px':'9px'};font-weight:800;color:#E8922D;">R$${it.price}</p>
+        </div>`).join('')}
+      </div>
+      <div style="position:relative;z-index:3;padding:${isSt?'10px 16px 20px':'8px 16px 14px'};text-align:center;">
+        <p style="${fonts.extra}font-size:${isSt?'12px':'10px'};color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</p>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='doisPorUm'){
+    const dSz=isSt?'180px':'150px';
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#FACC15);z-index:5;"></div>
+      <div style="position:relative;z-index:3;text-align:center;padding:${isSt?'28px 16px 12px':'18px 12px 8px'};">
+        ${getTitleEffect(title,isSt?'30px':'24px')}
+      </div>
+      <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;justify-content:center;">
+        <div style="transform:rotate(-6deg);margin-right:-16px;">${productImgHtml(p.img,dSz)}</div>
+        <div style="width:${isSt?'52px':'44px'};height:${isSt?'52px':'44px'};background:#FACC15;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:900;font-size:${isSt?'18px':'15px'};color:#0D0D0D;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:5;flex-shrink:0;${S.style==='neon'?'box-shadow:0 0 20px rgba(250,204,21,.5);':''}">+</div>
+        <div style="transform:rotate(6deg);margin-left:-16px;">${productImgHtml(p.img,dSz)}</div>
+      </div>
+      <div style="position:relative;z-index:3;padding:${isSt?'12px 24px 20px':'8px 20px 16px'};text-align:center;">
+        ${getPriceHtml(subtitle,oldprice,subSz)}
+        ${extra?`<p style="${fonts.extra}font-size:${extraSz};color:rgba(255,255,255,.75);margin-top:8px;">${extra}</p>`:''}
+        <div style="margin-top:10px;">${getCtaHtml()}</div>
+        <div style="margin-top:4px;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='copa'){
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#006341,#FFC72C,#006341);z-index:5;"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#006341,#FFC72C,#006341);z-index:5;"></div>
+      <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #FFC72C;" crossorigin="anonymous">
+        <div style="background:rgba(0,100,65,.85);padding:4px 14px;border-radius:20px;"><span style="font-family:Poppins,sans-serif;font-size:${isSt?'11px':'10px'};font-weight:800;color:#FFC72C;letter-spacing:2px;">COPA 2026</span></div>
+      </div>
+      <div style="position:relative;z-index:3;text-align:center;padding:0 ${pad};">
+        ${getTitleEffect(title,isSt?'40px':'34px')}
+      </div>
+      <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;justify-content:center;">
+        <div style="position:relative;">${productImgHtml(p.img,imgSz)}${getBadgeHtml('product')}</div>
+      </div>
+      <div style="position:relative;z-index:3;padding:${isSt?'0 24px 20px':'0 20px 16px'};text-align:center;">
+        ${getPriceHtml(subtitle,oldprice,subSz)}
+        ${extra?`<p style="${fonts.extra}font-size:${extraSz};color:rgba(255,255,255,.75);margin-top:6px;">${extra}</p>`:''}
+        <div style="margin-top:8px;">${getCtaHtml()}</div>
+        <div style="margin-top:4px;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='horario'){
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:${pad};">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:relative;z-index:3;text-align:center;max-width:90%;">
+        <img src="${LOGO}" style="width:${isSt?'90px':'72px'};height:${isSt?'90px':'72px'};border-radius:50%;border:3px solid #E8922D;margin-bottom:20px;${S.style==='neon'?'box-shadow:0 0 20px rgba(232,146,45,.4);':''}" crossorigin="anonymous">
+        ${getTitleEffect(title,isSt?'36px':'30px')}
+        <div style="margin:20px 0;padding:20px 32px;background:rgba(0,0,0,.3);border-radius:16px;${S.style==='neon'?'border:1px solid rgba(232,146,45,.3);box-shadow:0 0 20px rgba(232,146,45,.1);':''}${S.style==='premium'?'border:1px solid rgba(212,165,49,.2);':''}">
+          <p style="${fonts.sub}font-size:${isSt?'44px':'36px'};color:#E8922D;margin:0;">${subtitle}</p>
+          <p style="${fonts.extra}font-size:${isSt?'14px':'12px'};color:rgba(255,255,255,.6);margin-top:8px;">Segunda a Domingo</p>
+        </div>
+        <p style="${fonts.extra}font-size:${isSt?'15px':'13px'};color:rgba(255,255,255,.75);">${extra}</p>
+        <div style="margin-top:16px;">
+          <span style="${fonts.extra}font-size:${isSt?'12px':'10px'};color:rgba(255,255,255,.5);">R. Lomas Valentinas, 104 — Realengo, RJ</span>
+        </div>
+        <div style="margin-top:10px;">${getCtaHtml()}</div>
+      </div>
+      <div style="position:absolute;bottom:14px;left:0;right:0;text-align:center;z-index:3;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='bastidores'){
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#E8922D,#D4A531);z-index:5;"></div>
+      <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;" crossorigin="anonymous">
+        <div style="background:rgba(232,146,45,.2);padding:5px 14px;border-radius:20px;">
+          <span style="font-family:Poppins,sans-serif;font-size:10px;font-weight:800;color:#E8922D;letter-spacing:2px;">BASTIDORES</span>
+        </div>
+      </div>
+      <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;justify-content:center;padding:16px;">
+        <div style="width:${isSt?'90%':'85%'};height:${isSt?'75%':'80%'};border:3px dashed rgba(232,146,45,.4);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.2);gap:12px;">
+          ${productImgHtml(p.img,isSt?'160px':'140px')}
+          <p style="${fonts.extra}font-size:${isSt?'11px':'9px'};color:rgba(255,255,255,.4);text-align:center;padding:0 16px;">Substitua pela foto dos bastidores</p>
+        </div>
+      </div>
+      <div style="position:relative;z-index:3;padding:${isSt?'8px 24px 24px':'6px 20px 16px'};text-align:center;">
+        ${getTitleEffect(title,isSt?'28px':'24px')}
+        <p style="${fonts.sub}font-size:${isSt?'14px':'12px'};color:rgba(255,255,255,.75);margin-top:6px;">${subtitle}</p>
+        ${extra?`<p style="${fonts.extra}font-size:${isSt?'12px':'11px'};color:#E8922D;margin-top:4px;">${extra}</p>`:''}
+        <div style="margin-top:8px;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  if(S.tpl==='frete'){
+    canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      ${deco}
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#22C55E,#16A34A);z-index:5;"></div>
+      <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 4px'};">
+        <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #22C55E;" crossorigin="anonymous">
+        <div style="background:#22C55E;padding:6px 16px;border-radius:20px;"><span style="font-family:Poppins,sans-serif;font-size:11px;font-weight:800;color:white;letter-spacing:1px;">ENTREGA GRÁTIS</span></div>
+      </div>
+      <div style="position:relative;z-index:3;text-align:center;padding:8px ${pad} 0;">
+        ${getTitleEffect(title,isSt?'36px':'30px')}
+      </div>
+      <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;justify-content:center;">
+        <div style="position:relative;">${productImgHtml(p.img,imgSz)}${getBadgeHtml('product')}</div>
+      </div>
+      <div style="position:relative;z-index:3;padding:${isSt?'0 24px 20px':'0 20px 16px'};text-align:center;">
+        ${getPriceHtml(subtitle,oldprice,subSz)}
+        ${extra?`<p style="${fonts.extra}font-size:${extraSz};color:rgba(255,255,255,.75);margin-top:6px;">${extra}</p>`:''}
+        <div style="margin-top:8px;">${getCtaHtml()}</div>
+        <div style="margin-top:4px;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+      </div>
+    </div>`;
+    return;
+  }
+
+  // ========= DEFAULT LAYOUT (promo, combo, flash, deporX, weekend, date, new) =========
+  const isFlash=S.tpl==='flash';
+  const topBar=isFlash?'background:linear-gradient(90deg,#FACC15,#E8922D);':'background:linear-gradient(90deg,#E8922D,#D4A531);';
+  const pillLabels={promo:'PROMOÇÃO',combo:'COMBO',flash:'RELÂMPAGO',deporX:'OFERTA',weekend:'FIM DE SEMANA',date:'ESPECIAL','new':'NOVIDADE'};
+  const pillText=pillLabels[S.tpl]||'POINT DA LOMAS';
+
+  canvas.innerHTML=`<div style="width:100%;height:100%;${bgStyle};position:relative;overflow:hidden;display:flex;flex-direction:column;">
+    ${deco}
+    <div style="position:absolute;top:0;left:0;right:0;height:5px;${topBar}z-index:5;"></div>
+
+    <div style="position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:${isSt?'22px 18px 8px':'14px 16px 6px'};">
+      <img src="${LOGO}" style="width:${isSt?'48px':'40px'};height:${isSt?'48px':'40px'};border-radius:50%;border:2px solid #E8922D;${S.style==='neon'?'box-shadow:0 0 12px rgba(232,146,45,.4);':''}" crossorigin="anonymous">
+      <div style="background:${isFlash?'#FACC15':'#E8922D'};padding:5px 14px;border-radius:20px;${S.style==='neon'?'box-shadow:0 0 12px rgba(232,146,45,.4);':''}">
+        <span style="font-family:Poppins,sans-serif;font-size:10px;font-weight:800;color:#0D0D0D;letter-spacing:1px;">${pillText}</span>
+      </div>
+    </div>
+
+    <div style="position:relative;z-index:3;text-align:center;padding:${isSt?'4px 20px':'0 16px'};">
+      ${getTitleEffect(title,titleSz)}
+    </div>
+
+    <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;justify-content:center;padding:4px;">
+      <div style="position:relative;">
+        ${productImgHtml(p.img,imgSz)}
+        ${getBadgeHtml('product')}
+      </div>
+    </div>
+
+    <div style="position:relative;z-index:3;padding:${isSt?'0 24px 20px':'0 20px 16px'};text-align:center;">
+      ${getPriceHtml(subtitle,oldprice,subSz)}
+      ${extra?`<p style="${fonts.extra}font-size:${extraSz};color:rgba(255,255,255,.75);margin-top:6px;">${extra}</p>`:''}
+      <div style="margin-top:${isSt?'10px':'6px'};">${getCtaHtml()}</div>
+      <div style="margin-top:4px;"><span style="font-family:Poppins,sans-serif;font-size:10px;color:rgba(255,255,255,.4);">@pointdalomas | Realengo, RJ</span></div>
+    </div>
+  </div>`;
+}
+
+// ============================
+// EXPORT
+// ============================
+async function exportPost(){
+  const canvas=$('post-canvas');
+  const scale=S.format==='feed'?1080/540:1080/360;
+  try{
+    const c=await html2canvas(canvas,{scale,useCORS:true,allowTaint:true,backgroundColor:null});
+    const link=document.createElement('a');
+    const p=PRODUCTS[S.product];
+    const ts=Date.now().toString(36);
+    link.download=`point-da-lomas_${S.tpl}_${S.style}_${p.name.replace(/\s+/g,'-').toLowerCase()}_${S.format}_${ts}.png`;
+    link.href=c.toDataURL('image/png');
+    link.click();
+    showToast('Imagem exportada!');
+  }catch(e){showToast('Erro ao exportar.');console.error(e)}
+}
+
+function copyForCaption(){
+  const p=PRODUCTS[S.product];
+  const title=$('post-title').value;
+  const subtitle=$('post-subtitle').value;
+  const extra=$('post-extra').value;
+  const text=`${title}\n\n${p.name} - ${subtitle}\n${p.desc}\n\n${extra}\n\n📲 Peça pelo link na bio\n📍 R. Lomas Valentinas, 104 - Realengo\n\n#PointDaLomas #Realengo #Lanche #Hamburguer #Delivery #RJ`;
+  navigator.clipboard.writeText(text).then(()=>showToast('Legenda copiada!'));
+}
+
+function randomize(){
+  S.tpl=TEMPLATES[Math.floor(Math.random()*TEMPLATES.length)].id;
+  S.style=STYLES[Math.floor(Math.random()*STYLES.length)].id;
+  S.product=Math.floor(Math.random()*PRODUCTS.length);
+  S.bgIdx=Math.floor(Math.random()*COLORS.length);
+  S.badge=BADGES[Math.floor(Math.random()*BADGES.length)].id;
+  initGenerator();applyDefaults();updatePreview();
+}
+
+// ============================
+// CALENDAR
+// ============================
+function getWeekOfMonth(d){return Math.floor((d-1)/7)%4}
+function renderCalendar(){
+  const grid=$('calendar-grid');
+  const y=S.calDate.getFullYear(),m=S.calDate.getMonth();
+  const mn=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  $('cal-month-title').textContent=`${mn[m]} ${y}`;
+  const fd=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),today=new Date();
+  let h=['Dom','Seg','Ter','Qua','Qui','Sex','Sab'].map(d=>`<div class="cal-header">${d}</div>`).join('');
+  const pd=new Date(y,m,0).getDate();
+  for(let i=fd-1;i>=0;i--)h+=`<div class="cal-day other-month"><div class="day-num">${pd-i}</div></div>`;
+  const themeIds=WEEK_THEMES.map(t=>t.id);
+  let lastWeek=-1;
+  for(let d=1;d<=dim;d++){
+    const dt=new Date(y,m,d),ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,dw=dt.getDay(),it=dt.toDateString()===today.toDateString(),sd=SPECIAL_DATES[ds];
+    const wi=getWeekOfMonth(d),theme=WEEK_THEMES[wi];
+    const dayIdx=dw===0?6:dw-1;
+    const cp=CONTENT_PLAN[theme.id][dayIdx];
+    if(wi!==lastWeek&&dw===0){h+=`<div class="cal-week-label" style="background:${theme.color}15;color:${theme.color};">${theme.name}: ${theme.desc}</div>`;lastWeek=wi}
+    let ev='';
+    if(sd)ev+=`<div class="day-event date">${sd.name}</div>`;
+    else ev+=`<div class="day-event weekly">${cp.promo}</div>`;
+    ev+=`<div class="day-content ct-${cp.formato}">${cp.formato}</div>`;
+    const tip=sd?sd.tip:`${cp.conteudo} | ${cp.estrategia}`;
+    h+=`<div class="cal-day ${it?'today':''}" title="${tip}"><div class="day-num">${d}</div>${ev}</div>`;
+  }
+  const tc=fd+dim,rm=7-(tc%7);if(rm<7)for(let i=1;i<=rm;i++)h+=`<div class="cal-day other-month"><div class="day-num">${i}</div></div>`;
+  grid.innerHTML=h;
+}
+function changeMonth(d){S.calDate.setMonth(S.calDate.getMonth()+d);renderCalendar()}
+
+// ============================
+// WEEKLY
+// ============================
+function renderWeeklyPlan(){
+  const theme=WEEK_THEMES.find(t=>t.id===S.weekTheme)||WEEK_THEMES[0];
+  const plan=CONTENT_PLAN[theme.id];
+  $('week-theme-tabs').innerHTML=WEEK_THEMES.map(t=>`<button class="week-theme-btn ${t.id===S.weekTheme?'active':''}" style="${t.id===S.weekTheme?`border-color:${t.color};background:${t.color}15;`:''}color:${t.id===S.weekTheme?t.color:'var(--gray)'}" onclick="S.weekTheme='${t.id}';renderWeeklyPlan()"><span style="width:10px;height:10px;border-radius:50%;background:${t.color};display:inline-block;flex-shrink:0"></span>${t.name}</button>`).join('');
+  $('week-theme-desc').innerHTML=`<span style="color:${theme.color};font-weight:700;">${theme.name}</span> — ${theme.desc}`;
+  $('weekly-plan').innerHTML=plan.map(w=>`<div class="week-day-card" style="border-top:3px solid ${theme.color};">
+    <h4>${w.day}</h4>
+    <div class="wk-formato ${w.formato}">${w.formato}</div>
+    <div class="wk-promo">${w.promo}</div>
+    <div class="wk-promo-desc">${w.promoDesc}</div>
+    <div class="wk-content">${w.conteudo}</div>
+    <div class="wk-estrategia">${w.estrategia}</div>
+    <div class="wk-hashtags">${w.hashtags}</div>
+  </div>`).join('');
+}
+
+// ============================
+// COPIES
+// ============================
+function renderCopies(){
+  $('copy-categories').innerHTML=Object.keys(COPIES).map(c=>`<button class="copy-cat-btn ${c===S.copyCat?'active':''}" onclick="S.copyCat='${c}';renderCopies()">${c}</button>`).join('');
+  $('copy-list').innerHTML=(COPIES[S.copyCat]||[]).map((c,i)=>`<div class="copy-card" onclick="copyCopy(${i})"><button class="copy-btn">Copiar</button><div class="copy-text">${c.text.replace(/\n/g,'<br>')}</div><div class="copy-tag">#${c.tag}</div></div>`).join('');
+}
+function copyCopy(i){
+  const c=COPIES[S.copyCat];if(!c||!c[i])return;
+  let t=c[i].text;const p=PRODUCTS[S.product];
+  t=t.replace(/\{produto\}/g,p.name).replace(/\{preco\}/g,String(p.price)).replace(/\{preco_de\}/g,String(p.price+4)).replace(/\{metade\}/g,String(Math.ceil(p.price/2))).replace(/\{desc\}/g,p.desc);
+  navigator.clipboard.writeText(t).then(()=>showToast('Copy copiada!'));
+}
+
+// ============================
+// ADS
+// ============================
+function replaceAdVars(text,p){
+  return text.replace(/\{produto\}/g,p.name).replace(/\{preco\}/g,String(p.price)).replace(/\{preco_de\}/g,String(p.price+4)).replace(/\{metade\}/g,String(Math.ceil(p.price/2))).replace(/\{desc\}/g,p.desc);
+}
+function updateAdProductImg(){
+  const p=PRODUCTS[S.adProduct];
+  const img=$('ad-prod-img');if(img)img.src=p.img;
+}
+function renderAds(){
+  // Product selector
+  const sel=$('ad-prod-select');
+  if(sel&&sel.options.length===0){
+    PRODUCTS.forEach((p,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${p.name} — R$${p.price}`;sel.appendChild(o)});
+    updateAdProductImg();
+  }
+  // Objective tabs
+  const objs=Object.keys(AD_COPIES);
+  $('ad-obj-tabs').innerHTML=objs.map(o=>`<button class="ad-obj-btn ${o===S.adObj?'active':''}" onclick="S.adObj='${o}';renderAds()">${o}</button>`).join('');
+  // Ad cards
+  const copies=AD_COPIES[S.adObj]||[];
+  const p=PRODUCTS[S.adProduct];
+  const colors={"Atrair":"#3B82F6","Converter":"#22C55E","Prova Social":"#8B5CF6","Urgência":"#C41E2A","Remarketing":"#EC4899"};
+  const cl=colors[S.adObj]||'#E8922D';
+  $('ad-grid').innerHTML=copies.map((c,i)=>{
+    const h=replaceAdVars(c.headline,p);
+    const b=replaceAdVars(c.body,p);
+    return `<div class="ad-card">
+      <button class="ad-card-copy" onclick="event.stopPropagation();copyAdCopy(${i})">Copiar Tudo</button>
+      <div class="ad-card-type" style="background:${cl}20;color:${cl};">${c.tag}</div>
+      <h3>${h}</h3>
+      <div class="ad-card-body">${b}</div>
+      <div class="ad-card-cta">${c.cta}</div>
+      <div class="ad-card-tip">${c.tip}</div>
+    </div>`;
+  }).join('');
+  renderStrategy();
+}
+function copyAdCopy(i){
+  const c=AD_COPIES[S.adObj];if(!c||!c[i])return;
+  const p=PRODUCTS[S.adProduct];
+  const h=replaceAdVars(c[i].headline,p);
+  const b=replaceAdVars(c[i].body,p);
+  const t=`HEADLINE:\n${h}\n\nTEXTO PRINCIPAL:\n${b}\n\nBOTÃO CTA: ${c[i].cta}`;
+  navigator.clipboard.writeText(t).then(()=>showToast('Anúncio copiado!'));
+}
+function renderStrategy(){
+  $('strategy-grid').innerHTML=`
+    <div class="strategy-card"><h4>Segmentação Geográfica</h4><ul>
+      <li>Raio de 3-5km a partir de Realengo</li>
+      <li>Bairros: Realengo, Padre Miguel, Bangu, Campo Grande, Senador Camará</li>
+      <li>Foco: moradores locais que pedem delivery à noite</li>
+    </ul></div>
+    <div class="strategy-card"><h4>Público-Alvo</h4><ul>
+      <li>Idade: 18-45 anos (principal: 20-35)</li>
+      <li>Interesses: Fast food, delivery, hambúrguer artesanal, iFood</li>
+      <li>Comportamento: pedem delivery regularmente</li>
+      <li>Custom audience: visitantes do perfil Instagram</li>
+    </ul></div>
+    <div class="strategy-card"><h4>Melhores Horários</h4><ul>
+      <li>Jantar: 17h-21h (pico de fome e decisão)</li>
+      <li>Noite: 21h-00h (pedidos tardios, menos concorrência)</li>
+      <li>Dias fortes: Quinta a Domingo</li>
+      <li>Evitar: manhã e início da tarde (sem demanda)</li>
+    </ul></div>
+    <div class="strategy-card"><h4>Budget Sugerido</h4><ul>
+      <li>Início: R$15-25/dia para testar criativos</li>
+      <li>Escalar: R$40-80/dia após validar o que funciona</li>
+      <li>Promo relâmpago: R$30-50 concentrado em 6h</li>
+      <li>Sempre ativo (evergreen): R$10-15/dia contínuo</li>
+    </ul></div>
+    <div class="strategy-card"><h4>Tipo de Criativo</h4><ul>
+      <li>FOTO real do produto > arte gráfica sempre</li>
+      <li>Vídeo curto (bastidores) converte 2-3x mais</li>
+      <li>Carrossel com 4-6 produtos para awareness</li>
+      <li>Imagem única com oferta clara para conversão</li>
+    </ul></div>
+    <div class="strategy-card"><h4>Funil de Anúncios</h4><ul>
+      <li>Topo: "Atrair" — público frio, alcance amplo</li>
+      <li>Meio: "Prova Social" — viu mas não interagiu</li>
+      <li>Fundo: "Converter" + "Urgência" — já interagiu</li>
+      <li>Retenção: "Remarketing" — clientes antigos</li>
+    </ul></div>
+  `;
+}
+
+// ============================
+// UPCOMING
+// ============================
+function renderUpcoming(){
+  const now=new Date();
+  const up=Object.entries(SPECIAL_DATES).map(([ds,info])=>({ds,...info,date:new Date(ds+'T00:00:00')})).filter(d=>d.date>=now).sort((a,b)=>a.date-b.date).slice(0,6);
+  const ms=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  const cls=['#C41E2A','#E8922D','#8B5CF6','#EC4899','#22C55E','#3B82F6'];
+  $('upcoming-dates').innerHTML=up.map((d,i)=>{
+    const dy=d.date.getDate(),mn=ms[d.date.getMonth()],du=Math.ceil((d.date-now)/864e5),cl=cls[i%cls.length];
+    return `<div class="upcoming-item"><div class="upcoming-date" style="background:${cl}20;color:${cl};"><div class="day">${dy}</div><div class="month">${mn}</div></div><div class="upcoming-info" style="flex:1"><h4>${d.name}</h4><p>${d.tip}</p></div><div style="text-align:right;flex-shrink:0;"><div style="font-size:20px;font-weight:800;color:${cl};">${du}</div><div style="font-size:10px;color:var(--gray);">dias</div></div></div>`;
+  }).join('');
+}
+
+// ============================
+// FAVORITES
+// ============================
+function getFavorites(){try{return JSON.parse(localStorage.getItem('pdl_favs')||'[]')}catch(e){return[]}}
+function saveFavorite(){
+  const favs=getFavorites();
+  const p=PRODUCTS[S.product];
+  const tl=TEMPLATES.find(t=>t.id===S.tpl);
+  const sl=STYLES.find(s=>s.id===S.style);
+  favs.push({tpl:S.tpl,style:S.style,product:S.product,bgIdx:S.bgIdx,badge:S.badge,label:(tl?tl.label:'')+'·'+(sl?sl.label:'')+'·'+p.name});
+  localStorage.setItem('pdl_favs',JSON.stringify(favs));
+  renderFavorites();showToast('Favorito salvo!');
+}
+function deleteFavorite(i){const favs=getFavorites();favs.splice(i,1);localStorage.setItem('pdl_favs',JSON.stringify(favs));renderFavorites()}
+function applyFavorite(i){
+  const f=getFavorites()[i];if(!f)return;
+  S.tpl=f.tpl;S.style=f.style;S.product=f.product;S.bgIdx=f.bgIdx;S.badge=f.badge;
+  initGenerator();applyDefaults();updatePreview();
+}
+function renderFavorites(){
+  const el=$('fav-list');if(!el)return;
+  const favs=getFavorites();
+  if(!favs.length){el.innerHTML='<p style="font-size:10px;color:var(--gray);padding:4px 0;">Nenhum favorito salvo ainda</p>';return;}
+  el.innerHTML=favs.map((f,i)=>`<div class="fav-item" onclick="applyFavorite(${i})"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${f.label||'Favorito '+(i+1)}</span><span class="fav-del" onclick="event.stopPropagation();deleteFavorite(${i})">✕</span></div>`).join('');
+}
+
+// ============================
+// WHATSAPP
+// ============================
+function shareWhatsApp(){
+  const p=PRODUCTS[S.product];
+  const title=$('post-title').value;
+  const subtitle=$('post-subtitle').value;
+  const msg=encodeURIComponent('🍔 *'+title+'*\n\n'+p.name+' — '+subtitle+'\n'+p.desc+'\n\n📲 Peça já!\nhttps://pointdalomas.com.br');
+  window.open('https://wa.me/5521966083951?text='+msg,'_blank');
+}
+
+// ============================
+// INIT
+// ============================
+// Dashboard card icons
+$('icon-gen').innerHTML=getIcon('palette',26);
+$('icon-cal').innerHTML=getIcon('calendar',26);
+$('icon-week').innerHTML=getIcon('barChart',26);
+$('icon-copy').innerHTML=getIcon('fileText',26);
+$('icon-ads').innerHTML=getIcon('target',26);
+initGenerator();applyDefaults();updatePreview();renderCalendar();renderWeeklyPlan();renderCopies();renderUpcoming();renderFavorites();renderAds();
+</script>
+</body>
+</html>
