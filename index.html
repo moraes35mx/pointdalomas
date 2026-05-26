@@ -451,31 +451,14 @@ const STYLES=[
 
 const BADGES=[
   {id:'none',label:'Nenhum',bg:'',fg:'',shape:''},
-  // Descontos
   {id:'desc10',label:'-10%',bg:'#EF4444',fg:'#FFF',shape:'circle'},
   {id:'desc20',label:'-20%',bg:'#EF4444',fg:'#FFF',shape:'circle'},
   {id:'desc30',label:'-30%',bg:'#DC2626',fg:'#FFF',shape:'circle'},
-  {id:'desc50',label:'-50%',bg:'#DC2626',fg:'#FACC15',shape:'burst'},
-  // Urgência
   {id:'hoje',label:'SÓ HOJE',bg:'#FACC15',fg:'#0D0D0D',shape:'pill'},
-  {id:'ultimas',label:'ÚLTIMAS!',bg:'#F97316',fg:'#FFF',shape:'pill'},
-  {id:'esgotando',label:'ESGOTANDO',bg:'#EF4444',fg:'#FFF',shape:'pill'},
-  // Novidade
   {id:'novo',label:'NOVO',bg:'#22C55E',fg:'#FFF',shape:'pill'},
-  {id:'lancamento',label:'LANÇAMENTO',bg:'#10B981',fg:'#FFF',shape:'ribbon'},
-  // Social proof
   {id:'mais_vendido',label:'MAIS VENDIDO',bg:'#E8922D',fg:'#0D0D0D',shape:'ribbon'},
-  {id:'favorito',label:'FAVORITO',bg:'#EC4899',fg:'#FFF',shape:'pill'},
-  {id:'campeao',label:'CAMPEÃO',bg:'#D4A531',fg:'#0D0D0D',shape:'shield'},
-  // Promos
-  {id:'gratis',label:'GRÁTIS',bg:'#22C55E',fg:'#FFF',shape:'burst'},
-  {id:'imperdivel',label:'IMPERDÍVEL',bg:'#8B5CF6',fg:'#FFF',shape:'pill'},
-  {id:'exclusivo',label:'EXCLUSIVO',bg:'#6366F1',fg:'#FFF',shape:'pill'},
-  {id:'limitado',label:'LIMITADO',bg:'#F97316',fg:'#0D0D0D',shape:'pill'},
-  // Temáticos
+  {id:'frete',label:'FRETE GRÁTIS',bg:'#22C55E',fg:'#FFF',shape:'pill'},
   {id:'copa',label:'COPA 2026',bg:'#006341',fg:'#FFC72C',shape:'pill'},
-  {id:'frete',label:'FRETE GRÁTIS',bg:'#22C55E',fg:'#FFF',shape:'ribbon'},
-  {id:'primeiro',label:'1° PEDIDO',bg:'#3B82F6',fg:'#FFF',shape:'circle'},
 ];
 
 const COLORS=[
@@ -762,21 +745,9 @@ function getBadgeHtml(position){
     const w=Math.round((isLong?64:56)*sz),fs=Math.round((isLong?10:15)*sz);
     return `<div style="${base}top:${-Math.round(8*sz)}px;right:${-Math.round(8*sz)}px;width:${w}px;height:${w}px;border-radius:50%;background:${b.bg};color:${b.fg};font-size:${fs}px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;${fx}">${b.label}</div>`;
   }
-  if(b.shape==='burst'){
-    const w=Math.round(72*sz),fs=Math.round((b.label.length>4?12:16)*sz);
-    const sp=Math.round(6*sz);
-    return `<div style="${base}top:${-Math.round(12*sz)}px;right:${-Math.round(12*sz)}px;width:${w}px;height:${w}px;overflow:visible;">
-      <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 100 100"><polygon points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35" fill="${b.bg}"/></svg>
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:${b.fg};font-family:Poppins,sans-serif;font-weight:900;font-size:${fs}px;z-index:2;line-height:1;${fx}">${b.label}</div>
-    </div>`;
-  }
   if(b.shape==='ribbon'){
     const fs=Math.round(9*sz),py=Math.round(5*sz),px=Math.round(32*sz);
     return `<div style="${base}top:${Math.round(12*sz)}px;right:${-Math.round(20*sz)}px;transform:rotate(35deg);background:${b.bg};color:${b.fg};font-size:${fs}px;padding:${py}px ${px}px;letter-spacing:1px;box-shadow:0 2px 6px rgba(0,0,0,.3);${fx}">${b.label}</div>`;
-  }
-  if(b.shape==='shield'){
-    const w=Math.round(58*sz),h=Math.round(66*sz),fs=Math.round((b.label.length>7?8:9)*sz);
-    return `<div style="${base}top:${-Math.round(6*sz)}px;right:${-Math.round(6*sz)}px;width:${w}px;height:${h}px;background:${b.bg};border-radius:${Math.round(4*sz)}px ${Math.round(4*sz)}px ${Math.round(28*sz)}px ${Math.round(28*sz)}px;display:flex;align-items:center;justify-content:center;text-align:center;color:${b.fg};font-size:${fs}px;line-height:1.15;padding:${Math.round(2*sz)}px ${Math.round(6*sz)}px;${fx}">${b.label}</div>`;
   }
   // pill
   const fs=Math.round(11*sz),py=Math.round(5*sz),px=Math.round(14*sz);
